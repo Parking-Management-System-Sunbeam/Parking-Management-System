@@ -1,9 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ButtonComponent from '../../Components/ButtonComponent';
+import TextInputCompnent from '../../Components/TextInputCompnent';
 
+import parking from "../../assets/AuthImages/parking.jpg"
 const SignUp = () => {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+   const handleNameChange = (e) => {
+    setName(e.target.value);
+    console.log(name)
+  }
+   const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    console.log(email)
+  }
+    const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    console.log(password)
+  }
+    const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    console.log(confirmPassword)
+  }
   return (
     <div>
-      
+          <div className="flex  flex-row justify-content-center">
+            {/* image */}
+            <img src={`${parking}`} alt="" className='flex-1/2 w-1/2  object-cover h-screen' />
+            
+            {/* SignUp */}
+            <div className=' w-full p-14 border-dashed flex-1/2 bg-white shadow-lg h-screen flex flex-col space-y-9 '>
+           {/* Headings */}
+            <div className="space-y-2 mb-6">
+
+                <h2 className=' text-4xl  font-bold font-monospace'>Account Sign Up</h2>
+                <p className='text-gray-500'>Become a member and enjoy  exclusive promotions.</p>
+          
+            </div>
+          <div className='mt-5 mb-11'>
+
+            {/* Form fields */}
+            <div className='flex flex-col space-y-7 '>
+             
+              <TextInputCompnent title='Full Name' isPassword={false} onChange={handleNameChange} />
+              <TextInputCompnent title='Email Address' isPassword={false} onChange={handleEmailChange} />
+           <TextInputCompnent title='Password' isPassword={true} onChange={handlePasswordChange} />
+           <TextInputCompnent title='Confirm Password' isPassword={true} onChange={handleConfirmPasswordChange} />
+            </div>
+
+          
+          </div>
+
+          {/* footer */}
+          <div className='flex flex-col items-center space-y-4 '>
+            <ButtonComponent  title='Sign Up' onPress={()=>{}} />
+            <p className='text-gray-500 text-center'>Already have an account? <a href="/signin" className='text-gray-800   font-bold hover:underline'>Sign In</a></p>
+            </div>
+            </div>
+        </div>
     </div>
   )
 }
