@@ -5,10 +5,11 @@ import SignUp from './Pages/Auth/SignUp'
 
 const App = () => {
   return (
-    <div className=''>
-    <Login />
-    </div>
-  )
-}
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
+    </Routes>
+  );
+};
 
-export default App
+export default App;
