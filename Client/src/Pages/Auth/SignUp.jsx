@@ -3,7 +3,11 @@ import ButtonComponent from '../../Components/ButtonComponent';
 import TextInputCompnent from '../../Components/TextInputCompnent';
 
 import parking from "../../assets/AuthImages/parking.jpg"
+import { Link, useNavigate } from 'react-router-dom';
 const SignUp = () => {
+
+  const nav = useNavigate();
+
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   
@@ -57,8 +61,10 @@ const SignUp = () => {
 
           {/* footer */}
           <div className='flex flex-col items-center space-y-4 '>
-            <ButtonComponent  title='Sign Up' onPress={()=>{}} />
-            <p className='text-gray-500 text-center'>Already have an account? <a href="/signin" className='text-gray-800   font-bold hover:underline'>Sign In</a></p>
+            <ButtonComponent  title='Sign Up' onPress={()=>{
+              nav('/home');
+            }} />
+            <p className='text-gray-500 text-center'>Already have an account? <Link to="/" className='text-gray-800   font-bold hover:underline'>Sign In</Link></p>
             </div>
             </div>
         </div>

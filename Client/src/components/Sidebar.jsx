@@ -24,7 +24,7 @@ const Sidebar = () => {
           </div>
         </div>
         <div className='mb-8  w-full   p-5 '>
-          <Link to="/login" className="text-red-600 px-11 hover:text-red-800 font-medium transition">
+          <Link to="/" className="text-red-600 px-11 hover:text-red-800 font-medium transition">
             Logout
           </Link>
         </div>

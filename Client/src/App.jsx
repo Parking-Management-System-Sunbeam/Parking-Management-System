@@ -11,19 +11,39 @@ import OrderSummary from './Components/OrderSummary'
 import PaymentComponent from './Components/PaymentComponent'
 import PayDetails from './Components/PayDetails'
 
+
+import Dashboard from './Pages/Admin/Dashboard'
+
+import Addplace from './Pages/Admin/Addplace'
+import Earning from './Pages/Admin/Earning'
+import EditPlace from './Pages/Admin/EditPlace'
 const App = () => {
   return (
-    // <OrderSummary/>
-    <Payment/>
-    // <PayDetails/>
-    // <PaymentComponent/>
-    // <Routes>
-    //   <Route path="/" element={<Login />} />
-    //   <Route path="/home" element={<Home />} />
-    //   <Route path="/booking" element={<Bookings />} />
-    //   <Route path="/about-us" element={<AboutUs />} />
+   
+      <Routes>
+        {/* auth */}
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
 
-    // </Routes>
+        {/* user */}
+        <Route path="/home" element={<Home />} />
+        <Route path="/search" element={<SearchComponent />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/booking" element={<Bookings />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/order-summary" element={<OrderSummary />} />
+        <Route path="/payment-component" element={<PaymentComponent />} />
+        <Route path="/pay-details" element={<PayDetails />} />
+
+        {/* Admin */}
+        <Route path="/dashbord" element={<Dashboard />} /> 
+        <Route path="/add-place" element={<Addplace />} />
+        <Route path="/edit-place" element={<EditPlace />} />
+        <Route path="/earning" element={<Earning />} />
+      </Routes>
+
+
+
   );
 };
 

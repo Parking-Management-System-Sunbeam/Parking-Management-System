@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import parking from "../../assets/AuthImages/parking.jpg"
 import TextInputCompnent from '../../Components/TextInputCompnent'
 import ButtonComponent from '../../Components/ButtonComponent';
+import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
+
+  const nav = useNavigate();
+
    const [password, setPassword] = useState('');
    const [email, setEmail] = useState('');
    
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -48,8 +53,10 @@ const Login = () => {
 
           {/* footer */}
           <div className='flex flex-col items-center space-y-4 '>
-            <ButtonComponent  title='Sign In' onPress={()=>{}} />
-            <p className='text-gray-500 text-center'>Don't have an account? <a href="/signup" className='text-gray-800   font-bold hover:underline'>Sign Up</a></p>
+            <ButtonComponent  title='Sign In' onPress={()=>{ 
+              nav('/home');
+             }} />
+            <p className='text-gray-500 text-center'>Don't have an account? <Link to="/signup" className='text-gray-800   font-bold hover:underline'>Sign Up</Link></p>
             </div>
             </div>
         </div>
