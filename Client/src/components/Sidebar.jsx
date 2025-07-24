@@ -1,10 +1,10 @@
-import React from 'react'
+
 import logo from '../assets/Parkit.png'; 
 import {Link} from "react-router-dom"
 const Sidebar = () => {
   return (
-       <>
-      <div className="flex flex-col justify-between  h-screen w-full items-center">
+       <>     
+        <div className="flex flex-col justify-between h-screen sticky top-0 w-full items-center">
         <div className='p-5'>
           <div className="text-center ">
             <img src={logo} alt="Logo" className="w-full " />

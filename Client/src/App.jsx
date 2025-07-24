@@ -13,7 +13,6 @@ import PayDetails from './Components/PayDetails'
 
 
 import Dashboard from './Pages/Admin/Dashboard'
-
 import Addplace from './Pages/Admin/Addplace'
 import Earning from './Pages/Admin/Earning'
 import EditPlace from './Pages/Admin/EditPlace'
