@@ -1,6 +1,6 @@
 import React from 'react';
 import DataTable from 'react-data-table-component';
-
+import { X } from 'lucide-react';
 const data = [
   { id: 1, user: 'John Doe', price: 100, vehicleType: 'Car', slot: '9:00 AM - 10:00 AM', status: 'Booked' },
   { id: 2, user: 'Jane Smith', price: 80, vehicleType: 'Bike', slot: '10:00 AM - 11:00 AM', status: 'Available' },
@@ -41,31 +41,11 @@ const columns = [
   { name: 'Vehicle Type', selector: row => row.vehicleType},
   { name: 'Slot', selector: row => row.slot },
   {
-    name: 'Status',
-    cell: row => (
-      <span
-        className={`px-2 py-1 text-xs font-semibold rounded-full ${
-          row.status === 'Booked'
-            ? 'bg-green-100 text-green-700'
-            : row.status === 'Available'
-            ? 'bg-blue-100 text-blue-700'
-            : 'bg-red-100 text-red-700'
-        }`}
-      >
-        {row.status}
-      </span>
-    ),
-    sortable: true,
-  },
-  {
       name: 'Actions',
       cell: row => (
-        <button
-          onClick={() => handleDelete(row.id)}
-          className="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded"
-        >
-          Delete
-        </button>
+         <button onClick={(e)=> window.alert("Deleted")} className="p-2 hover:bg-gray-200 rounded">
+      <X className="w-5 h-5 text-gray-700" />
+    </button>
       )
     }
 ];

@@ -1,113 +1,127 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { X } from 'lucide-react';
+import ButtonComponent from '../../Components/ButtonComponent';
+import Sidebar from '../../components/Sidebar';
+import AdminSidebar from '../../Components/Admin/AdminSidebar';
 
 const EditPlace = () => {
-  const { placeId } = useParams();
-//   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     location: '',
     area: '',
-    pincode: '',
     slots: '',
-    pricePerHour: '',
-    type: '',
-    photo: null,
+    price: '',
+    types: '',
+    image: null,
   });
-
-  useEffect(() => {
-    // Replace with API call to fetch parking place by ID
-    const fetchData = async () => {
-      // Simulate data fetch
-      const existingData = {
-        location: 'MG Road',
-        area: 'Shivajinagar',
-        pincode: '411001',
-        slots: '10',
-        pricePerHour: '20',
-        type: 'Car',
-      };
-      setFormData(existingData);
-    };
-    fetchData();
-  }, [placeId]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Update data in backend here
-    console.log("Updated data: ", formData);
-    navigate('/admin/dashboard');
+    if (name === 'image') {
+      setFormData({ ...formData, image: files[0] });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg mt-10">
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">Edit Parking (ID: {placeId})</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* same input fields as AddParkingForm */}
-        {[
-          { name: 'location', label: 'Location' },
-          { name: 'area', label: 'Area' },
-          { name: 'pincode', label: 'Pincode', type: 'text' },
-          { name: 'slots', label: 'Number of Slots', type: 'number' },
-          { name: 'pricePerHour', label: 'Price per Hour (₹)', type: 'number' },
-        ].map(({ name, label, type = 'text' }) => (
-          <div key={name}>
-            <label className="block font-medium text-gray-700 mb-1">{label}</label>
-            <input
-              type={type}
-              name={name}
-              value={formData[name]}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
-            />
+    <div className="flex min-h-screen bg-white text-gray-700">
+        
+      <aside className="w-64">
+        <AdminSidebar/>
+      </aside>
+      {/* Main Form */}
+      <div className="flex-1 p-10">
+        <form className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Form Fields */}
+          <div className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+              <input
+                type="text"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                className="w-full border border-gray-400 rounded-md px-4 py-2"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Area</label>
+              <input
+                type="text"
+                name="area"
+                value={formData.area}
+                onChange={handleChange}
+                className="w-full border border-gray-400 rounded-md px-4 py-2"
+              />
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Number of Slots</label>
+                <input
+                  type="number"
+                  name="slots"
+                  value={formData.slots}
+                  onChange={handleChange}
+                  className="w-full border border-gray-400 rounded-md px-4 py-2"
+                />
+              </div>
+
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">Price per hour</label>
+                <input
+                  type="number"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  className="w-full border border-gray-400 rounded-md px-4 py-2"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Types</label>
+              <input
+                type="text"
+                name="types"
+                value={formData.types}
+                onChange={handleChange}
+                className="w-full border border-gray-400 rounded-md px-4 py-2"
+              />
+            </div>
           </div>
-        ))}
 
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Vehicle Type</label>
-          <select
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            required
-          >
-            <option value="">Select type</option>
-            <option value="Car">Car</option>
-            <option value="Bike">Bike</option>
-            <option value="Truck">Truck</option>
-            <option value="SUV">SUV</option>
-          </select>
-        </div>
+          {/* Image & Delete */}
+          <div className="flex flex-col items-center gap-4">
+            <div className="w-48 h-48 border border-gray-300 bg-gray-100 flex items-center justify-center relative">
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleChange}
+                className="absolute inset-0 opacity-0 cursor-pointer"
+              />
+              {formData.image ? (
+                <img
+                  src={URL.createObjectURL(formData.image)}
+                  alt="Preview"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="text-sm text-gray-500">Add Image</div>
+              )}
+            </div>
+            <ButtonComponent title='Delete image' onPress={(e)=>window.alert("image delete")}/>
+          </div>
 
-        <div>
-          <label className="block font-medium text-gray-700 mb-1">Replace Photo</label>
-          <input
-            type="file"
-            name="photo"
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-
-        <div className="text-right">
-          <button
-            type="submit"
-            className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
-          >
-            Update Parking
-          </button>
-        </div>
-      </form>
+          {/* Buttons */}
+          <div className="col-span-2 flex justify-start gap-6 mt-8">
+            <ButtonComponent title='Save Changes' onPress={(e)=> window.alert("Changes saved")}/>
+            <ButtonComponent title='Cancel' onPress={(e)=>window.alert("cancelled")}/>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
