@@ -5,7 +5,7 @@ import {
   CarFront,
   ArrowUpRight,
   ArrowRightCircle,
-} from "lucide-react"; // Lucide Icons
+} from "lucide-react"; 
 
 const MyBookComponent = ({
   day = "SUNDAY",
