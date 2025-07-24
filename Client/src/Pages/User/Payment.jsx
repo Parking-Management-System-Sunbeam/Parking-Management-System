@@ -13,11 +13,7 @@ const Payment = () => {
         <Sidebar />
       </div>
 
-<<<<<<< HEAD
       <div className="w-3/5 flex flex-col items-center justify-start py-10">
-=======
-      <div className="w-3/5 flex flex-col items-center  py-10">
->>>>>>> d2b15793a5fa3435135233b90d4be556ab1af5fc
         <PayDetails />
       </div>
 
