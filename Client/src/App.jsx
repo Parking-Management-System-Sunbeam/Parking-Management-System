@@ -6,16 +6,24 @@ import SignUp from './Pages/Auth/SignUp'
 import { Route, Routes } from 'react-router-dom';
 import AboutUs from './Pages/User/AboutUs'
 import Bookings from './Pages/User/Bookings'
+import Payment from './Pages/User/Payment'
+import OrderSummary from './Components/OrderSummary'
+import PaymentComponent from './Components/PaymentComponent'
+import PayDetails from './Components/PayDetails'
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/booking" element={<Bookings />} />
-      <Route path="/about-us" element={<AboutUs />} />
+    // <OrderSummary/>
+    <Payment/>
+    // <PayDetails/>
+    // <PaymentComponent/>
+    // <Routes>
+    //   <Route path="/" element={<Login />} />
+    //   <Route path="/home" element={<Home />} />
+    //   <Route path="/booking" element={<Bookings />} />
+    //   <Route path="/about-us" element={<AboutUs />} />
 
-    </Routes>
+    // </Routes>
   );
 };
 
