@@ -1,9 +1,10 @@
-import React from "react";
-import Sidebar from "../../components/Sidebar";
 
-function Home() {
+import React from 'react'
+import Sidebar from '../../components/Sidebar'
+
+const Bookings = () => {
   return (
-    <div className="flex">
+     <div className="flex">
       <div className=" flex-1/6">
 
       <Sidebar />
@@ -12,7 +13,7 @@ function Home() {
         <h1 className="text-2xl font-bold mb-4">Welcome to the Home Page</h1>
         </div>
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Bookings
