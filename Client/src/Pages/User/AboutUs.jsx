@@ -1,9 +1,10 @@
-import React from "react";
-import Sidebar from "../../components/Sidebar";
 
-function Home() {
+import React from 'react'
+import Sidebar from '../../components/Sidebar';
+
+const AboutUs = () => {
   return (
-    <div className="flex">
+       <div className="flex">
       <div className=" flex-1/6">
 
       <Sidebar />
@@ -15,4 +16,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default AboutUs
