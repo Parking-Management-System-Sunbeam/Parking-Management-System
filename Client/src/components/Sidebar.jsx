@@ -10,7 +10,7 @@ const Sidebar = () => {
             <img src={logo} alt="Logo" className="w-full " />
           </div>
 
-          <div className=" flex flex-col space-y-4  font-medium p-11  ">
+          <div className=" flex flex-col space-y-4  font-medium   px-11 ">
             <Link to="/home" className="hover:text-gray-800 transition ">
               Home
             </Link>
@@ -23,8 +23,8 @@ const Sidebar = () => {
             
           </div>
         </div>
-        <div className='mb-8 '>
-          <Link to="/login" className="text-red-600 hover:text-red-800 font-medium transition">
+        <div className='mb-8  w-full   p-5 '>
+          <Link to="/login" className="text-red-600 px-11 hover:text-red-800 font-medium transition">
             Logout
           </Link>
         </div>
