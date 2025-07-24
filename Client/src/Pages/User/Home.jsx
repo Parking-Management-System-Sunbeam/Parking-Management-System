@@ -2,7 +2,9 @@ import React from "react";
 import Sidebar from "../../components/Sidebar";
 import SearchComponent from "../../Components/SearchComponent";
 import FilterComponent from "../../Components/FilterComponent";
+import Listing from "../../Components/Listing";
 
+import sunbeamParking from "../../assets/ParkingImages/parking.jpg"
 function Home() {
 
   const filterOptions = [
@@ -17,6 +19,17 @@ function Home() {
  { label: "Luxury Vehicles", value: "luxury" }
   ]
 
+
+  const parkingData = [
+    { id: 1, name: " Parking", location: "Mumbai, MH", vehicles: "Cars", rating: 4.5, image: sunbeamParking },
+    { id: 2, name: "Sunbeam Parking", location: "Pune, MH", vehicles: "Bikes", rating: 4.0, image: sunbeamParking },
+    { id: 3, name: "Sunbeam Parking", location: "Bangalore", vehicles: "Trucks", rating: 4.2, image: sunbeamParking },
+    { id: 4, name: "Sunbeam Parking", location: "Delhi, Union", vehicles: "Vans", rating: 4.8, image: sunbeamParking },
+    { id: 5, name: "Sunbeam Parking", location: "Chennai", vehicles: "SUVs", rating: 4.6, image: sunbeamParking },
+    { id: 6, name: "Sunbeam Parking", location: "Hyderabad", vehicles: "Electric Vehicles", rating: 4.3, image: sunbeamParking },
+    { id: 7, name: "Sunbeam Parking", location: "Kolkata", vehicles: "Luxury Vehicles", rating: 4.9, image: sunbeamParking },
+  { id: 10, name: "Sunbeam Parking", location: "Lucknow, UP", vehicles: "Luxury Vehicles", rating: 4.1, image: sunbeamParking }
+  ];
   return (
     <div className="flex">
       {/* sidebar */}
@@ -41,11 +54,23 @@ function Home() {
         <div className="flex flex-wrap gap-4 mb-6">
           {
            
-            filterOptions.map((option) => ( <FilterComponent key={option.value} label={option.label} value={option.value} defActive={option.active} />))
+            filterOptions.map((option) => ( <FilterComponent key={option.value}  label={option.label} value={option.value} defActive={option.active} />))
            
           }
         
         </div>
+
+        {/* cards */}
+
+             <div className="flex flex-wrap gap-7 mb-8">
+          {
+           
+            parkingData.map((option) => ( <Listing key={option.value} data={option} />))
+           
+          }
+        
+        </div>
+
       
         </div>
     </div>

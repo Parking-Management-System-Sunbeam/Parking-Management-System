@@ -9,7 +9,7 @@ const FilterComponent = ({label, defActive=false}) => {
   }
   return (
     <div>
-      <div className={` ${isActive ? 'border-[#ffbd59]  text-[#ffbd59] border-2' : 'border-gray-700  border-1' }  font-semibold inline-block rounded-2xl py-1 px-3 m-1.5  cursor-pointer transition-all duration-200 `} onClick={handleFilter}>
+      <div className={` ${isActive ? 'border-[#ffbd59]  text-[#ffbd59] border-2' : 'border-gray-700  border-1' }  font-semibold inline-block rounded-2xl py-1 px-3   cursor-pointer transition-all duration-200 `} onClick={handleFilter}>
       <label className='cursor-pointer' htmlFor=''>{label}</label>
       </div>
     </div>
