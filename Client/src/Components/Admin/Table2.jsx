@@ -28,6 +28,12 @@ const data = [
 
 ];
 
+function handleDelete(id) {
+  window.alert(`Delete booking` + id);
+}
+
+
+
 const columns = [
   { name: 'ID', selector: row => row.id },
   { name: 'User', selector: row => row.user},
