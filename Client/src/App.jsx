@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Login from "./Pages/Auth/Login";
 import Home from "./Pages/User/Home";
 import SearchComponent from "./Components/SearchComponent";
@@ -17,11 +17,17 @@ import Addplace from "./Pages/Admin/Addplace";
 import Earning from "./Pages/Admin/Earning";
 import EditPlace from "./Pages/Admin/EditPlace";
 import Details from "./Pages/User/Details";
+import SplashScreen from "./Pages/Splash/SplashScreen";
 const App = () => {
+  const [loading, setLoading] = useState(true);
+   useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000); 
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <Routes>
       {/* auth */}
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={loading ? <SplashScreen /> :<Login />} />
       <Route path="/signup" element={<SignUp />} />
 
       {/* user */}

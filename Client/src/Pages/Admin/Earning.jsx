@@ -1,4 +1,5 @@
 import React from 'react'
+import AdminSidebar from '../../Components/Admin/AdminSidebar';
  import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
@@ -21,7 +22,18 @@ const monthlyEarnings = [
 ];
 
   return (
-      <div className="w-[90%] mx-auto mt-10">
+    <>      
+     <div className='flex '>
+      <aside className="w-64">
+        <AdminSidebar/>
+      </aside>
+       <div className='flex flex-col w-full'>
+      <main className=" p-10">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Earnings Overview</h1>
+      </main>
+
+   
+    <div className="w-[80%] h-[50%] mx-auto mt-10">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Monthly Total Earnings</h2>
 
       <div className="bg-white shadow rounded-lg p-6">
@@ -36,6 +48,10 @@ const monthlyEarnings = [
         </ResponsiveContainer>
       </div>
     </div>
+    </div>
+    </div>
+    </>
+
   )
 }
 
