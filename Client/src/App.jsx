@@ -18,16 +18,17 @@ import Earning from "./Pages/Admin/Earning";
 import EditPlace from "./Pages/Admin/EditPlace";
 import Details from "./Pages/User/Details";
 import SplashScreen from "./Pages/Splash/SplashScreen";
+import SlotBooking from "./Pages/User/SlotBooking";
 const App = () => {
   const [loading, setLoading] = useState(true);
-   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 3000); 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 3000);
     return () => clearTimeout(timer);
   }, []);
   return (
     <Routes>
       {/* auth */}
-      <Route path="/" element={loading ? <SplashScreen /> :<Login />} />
+      <Route path="/" element={loading ? <SplashScreen /> : <Login />} />
       <Route path="/signup" element={<SignUp />} />
 
       {/* user */}
@@ -40,6 +41,7 @@ const App = () => {
       <Route path="/payment-component" element={<PaymentComponent />} />
       <Route path="/pay-details" element={<PayDetails />} />
       <Route path="/details" element={<Details />} />
+      <Route path="/slot-booking" element={<SlotBooking />} />
 
       {/* Admin */}
       <Route path="/dashboard" element={<Dashboard />} />

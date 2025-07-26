@@ -2,7 +2,6 @@ import React from "react";
 import logo from "../assets/Parkit.png";
 import { Link } from "react-router-dom";
 
-
 const Sidebar = () => {
   return (
     <>
