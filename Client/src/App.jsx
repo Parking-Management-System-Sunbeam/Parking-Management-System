@@ -1,11 +1,10 @@
 import React from 'react'
+import Login from './Pages/Auth/Login'
 
 const App = () => {
   return (
-    <div>
-     <h1 class="text-3xl font-bold underline">
-    Parking management
-    </h1>
+    <div className=''>
+    <Login />
     </div>
   )
 }
