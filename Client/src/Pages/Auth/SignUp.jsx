@@ -64,7 +64,7 @@ const SignUp = () => {
             <ButtonComponent  title='Sign Up' onPress={()=>{
               nav('/home');
             }} />
-            <p className='text-gray-500 text-center'>Already have an account? <Link to="/" className='text-gray-800   font-bold hover:underline'>Sign In</Link></p>
+            <p className='text-gray-500 text-center'>Already have an account? <Link to="/login" className='text-gray-800   font-bold hover:underline'>Sign In</Link></p>
             </div>
             </div>
         </div>

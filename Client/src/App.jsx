@@ -27,6 +27,7 @@ const App = () => {
   }, []);
   return (
     <Routes>
+      <Route path="/" element={<SplashScreen />} />
       {/* auth */}
       <Route path="/" element={loading ? <SplashScreen /> : <Login />} />
       <Route path="/signup" element={<SignUp />} />

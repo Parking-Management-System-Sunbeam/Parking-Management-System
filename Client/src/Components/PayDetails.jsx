@@ -6,7 +6,7 @@ const PayDetails = () => {
     <div>
       <div className="w-full justify-center items-center">
         <div className="w-full max-w-7xl p-8  rounded-lg">
-          <h2 className="text-xl font-semibold mb-6 text-center">Payment Details</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center">Payment Details</h2>
 
           <div className="space-y-5">
             <TextInputCompnent title="Card Number" />
