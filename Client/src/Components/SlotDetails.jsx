@@ -3,7 +3,11 @@ import React from "react";
 import logo from "../assets/ParkingImages/dummyParkingImage.png";
 import ButtonComponent from "./ButtonComponent";
 import { MapPin, Phone, Clock, Star, CarFront } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 const SlotDetails = () => {
+
+  const nav = useNavigate();
+
   const vendorData = {
     parkingName: "City Center Parking",
     location: "MG Road, Pune",
@@ -15,11 +19,11 @@ const SlotDetails = () => {
     phone: "+91-9876543210",
   };
   const bookNow = () => {
-    window.alert("Bookedd");
+    nav("/payment")
   };
   return (
     <>
-      <div className="p-6 flex flex-col justify-start overflow-hidden">
+      <div className="p-6 flex flex-col justify-start overflow-hidden mt-6">
         <div className="flex flex-col md:flex-row gap-8 items-start">
           <div className="flex justify-center h-[250px] w-2/5">
             <img

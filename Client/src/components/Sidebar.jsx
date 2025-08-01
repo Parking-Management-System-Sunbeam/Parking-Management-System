@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Sidebar = () => {
   return (
     <>
-      <div className="flex flex-col justify-between sticky top-0 h-screen w-full items-center border-r-2">
+      <div className="flex flex-col justify-between sticky top-0 h-screen w-full items-center ">
         <div className="p-5">
           <div className="text-center ">
             <img src={logo} alt="Logo" className="w-full " />

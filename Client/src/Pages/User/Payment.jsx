@@ -13,13 +13,13 @@ const Payment = () => {
         <Sidebar />
       </div>
 
-      <div className="w-3/5 flex flex-col items-center justify-start py-10">
+      <div className="w-2/5 flex flex-col items-center justify-start py-10">
         <PayDetails />
       </div>
 
-      <div className="w-1/5  px-4 py-10 space-y-6">
+      <div className="w-2/5  px-4 py-10 space-y-6">
         <OrderSummary />
-        <PaymentComponent />
+        {/* <PaymentComponent /> */}
       </div>
     </div>
   );

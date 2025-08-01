@@ -1,12 +1,14 @@
+import { Star } from "lucide-react";
 import React from "react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Listing = ({ data }) => {
   console.log(data);
+  const nav= useNavigate();
 
   const onDetails = () => {
     console.log("listing clicked");
-    //listing logic
+    nav("/details");
   };
   return (
     <>
@@ -32,8 +34,9 @@ const Listing = ({ data }) => {
             <div className=" flex-1">{data.vehicles} </div>
           </div>
           <div className="flex justify-between text-gray-600">
+            
             <div className=" flex-1 font-bold text-gray-800">Rating </div>
-            <div className=" flex-1">{data.rating} </div>
+            <div className=" flex space-x-2 gap-2 items-center flex-1">{data.rating} <Star width={18} fill="#ffbd59"     /> </div>
           </div>
 
           {/*  */}
