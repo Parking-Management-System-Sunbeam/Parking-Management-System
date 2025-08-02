@@ -33,4 +33,5 @@ public class User extends BaseEntity{
 	private String phone;
 	@Column(length = 50 ) 
 	private String img;
+	
 }
