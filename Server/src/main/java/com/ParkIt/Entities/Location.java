@@ -1,5 +1,6 @@
 package com.ParkIt.Entities;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -23,4 +24,9 @@ public class Location extends  BaseEntity {
 	private int price;	
 	 @Column(name = "image",length = 30)
 	private String image;
+
+
+    
+     
 }
+
