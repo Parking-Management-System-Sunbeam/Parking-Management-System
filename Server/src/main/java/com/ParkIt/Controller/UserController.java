@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ParkIt.Dto.UserRequestDto;
+import com.ParkIt.Dto.UserSignInDto;
 import com.ParkIt.service.UserService;
 
 
@@ -21,11 +22,18 @@ public class UserController {
 	
 	private final UserService userService;
 	
-	@PostMapping
+	@PostMapping("/signup")
 	public ResponseEntity<?> createUser(@RequestBody @Valid UserRequestDto userDto )
 	{
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
+	}
+	
+	@PostMapping("/signin")
+	public ResponseEntity<?> userLogin(@RequestBody @Valid UserSignInDto userDto )
+	{
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(userService.userSignin(userDto));
 	}
 
 }
