@@ -1,5 +1,7 @@
 package com.ParkIt.service;
 
+import java.util.List;
+
 import com.ParkIt.Dto.LocationRequestDto;
 import com.ParkIt.Dto.LocationResponseDto;
 
@@ -13,7 +15,11 @@ public interface LocationService {
 	    // Delete Location
 	    void deleteLocation(Long locationId);
 	    
-//	    void generateSlots(Long locationId);// other methods like addLocation, getLocation, etc.
+	    public List<LocationResponseDto> getAllLocations();
+	    
+	    List<LocationResponseDto> searchByPincode(String pincode);
+	    
+
 
 
 }

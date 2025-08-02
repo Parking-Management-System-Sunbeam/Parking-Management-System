@@ -1,8 +1,13 @@
 package com.ParkIt.Entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +29,15 @@ public class Location extends  BaseEntity {
 	private int price;	
 	 @Column(name = "image",length = 30)
 	private String image;
+	 private int noOfSlots;
+	 
+	 @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+	    private List<Slot> slots = new ArrayList<>();
+
+	    public void addSlot(Slot slot) {
+	        slot.setLocation(this);
+	        this.slots.add(slot);
+	    }
 
 
     

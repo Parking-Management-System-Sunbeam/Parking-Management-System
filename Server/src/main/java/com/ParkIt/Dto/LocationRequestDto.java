@@ -26,5 +26,6 @@ public class LocationRequestDto {
 
 	    @NotBlank(message = "Image URL or path is required")
 	    private String image;
+	    private int noOfSlots;
 
 }

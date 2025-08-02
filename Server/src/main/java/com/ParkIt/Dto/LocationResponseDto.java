@@ -4,7 +4,16 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class LocationResponseDto {
 
 	
@@ -12,9 +21,7 @@ public class LocationResponseDto {
     private String pincode;
     private Integer price;
     private String image;
-    private Long userId;
-    private String firstName;
-    private String lastName;
-    private String email;
+    private int noOfSlots;
+  
 
 }
