@@ -1,9 +1,15 @@
 package com.ParkIt.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,4 +41,12 @@ public class User extends BaseEntity{
 	private String phone;
 	@Column(length = 50 ) 
 	private String img;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Location> locations =new ArrayList<>();
+	
+	 public void addLocation(Location location) {
+	        locations.add(location);
+	    }
 }
+
