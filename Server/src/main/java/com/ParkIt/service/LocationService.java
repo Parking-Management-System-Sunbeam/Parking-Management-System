@@ -1,19 +1,30 @@
 package com.ParkIt.service;
 
+import java.util.List;
+
 import com.ParkIt.Dto.LocationRequestDto;
 import com.ParkIt.Dto.LocationResponseDto;
 
 public interface LocationService {
-	
-	    LocationResponseDto createLocation(LocationRequestDto dto, Long userId);
+		// Add locations with n slots
+	    LocationResponseDto createLocation(LocationRequestDto dto);
 
-	    // Update Location
-	    LocationResponseDto updateLocation(Long locationId, LocationRequestDto dto);
-
-	    // Delete Location
-	    void deleteLocation(Long locationId);
+	    // Get all locations
+	    List<LocationResponseDto> getAllLocations();
 	    
-//	    void generateSlots(Long locationId);// other methods like addLocation, getLocation, etc.
+	    // Get location by id
+	    LocationResponseDto getLocationById(Long id);
 
-
+	    // get location by pincode
+	    List<LocationResponseDto> getLocationsByPincode(String pincode);
+	    
+	    // serach location by location name
+	    List<LocationResponseDto> searchLocationsByName(String name);
+	    
+	    // Update location by id
+	    
+	    LocationResponseDto updateLocation(Long id, LocationRequestDto dto);
+	    
+	    // Delete location by id
+	    void deleteLocation(Long id);
 }

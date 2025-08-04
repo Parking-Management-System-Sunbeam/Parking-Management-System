@@ -25,12 +25,18 @@ public class Slot {
 	    private Long id;
 	 
 	 @Column(name = "slot_name", nullable = false, unique = true)
-	 private String slot_name;
+	 private String slotName;
 	 
 	 @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "location_id")
 	    private Location location;
 	 
 	 @Column(name = "is_available")
-	    private boolean isAvailable;
+	    private boolean isAvailable = true;
+	 
+	    public Slot(String slot_name, Location location) {
+	        this.slotName = slot_name;
+	        this.location = location;
+	        this.isAvailable = true;
+	    }
 }

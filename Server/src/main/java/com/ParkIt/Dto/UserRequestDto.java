@@ -15,11 +15,8 @@ import lombok.ToString;
 @ToString
 public class UserRequestDto {
 
-	@NotBlank(message = "First name is required")
-    private String firstName;
-
-    @NotBlank(message = "Last name is required")
-    private String lastName;
+	@NotBlank(message = "Name is required")
+    private String userName;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")

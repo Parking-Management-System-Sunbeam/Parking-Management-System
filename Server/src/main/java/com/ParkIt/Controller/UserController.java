@@ -33,7 +33,7 @@ public class UserController {
 	public ResponseEntity<?> userLogin(@RequestBody @Valid UserSignInDto userDto )
 	{
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.userSignin(userDto));
+		return ResponseEntity.status(HttpStatus.OK).body(userService.userSignin(userDto));
 	}
-
+	
 }

@@ -29,7 +29,6 @@ public class UserServiceImpl  implements UserService {
 		{
 			throw new AlreadyExistsException("User is already present with email :" + user.getEmail() );
 		}
-		System.out.println(user);
 	
 		User persistUser=mapper.map(user, User.class);
 		System.out.println(persistUser);
@@ -49,11 +48,6 @@ public class UserServiceImpl  implements UserService {
 		 
 		return mapper.map(persistUser, UserSignInResponseDto.class);
 	}
-	
-	
-	
-	
-	
 	
 
 }

@@ -26,10 +26,8 @@ import lombok.ToString;
 @ToString
 public class User extends BaseEntity{
 
-	@Column(length = 20, name = "first_name")
-	private String firstName;
-	@Column(length = 30, name = "last_name")
-	private String lastName;
+	@Column(length = 30, name = "user_name")
+	private String userName;
 	@Column(length = 30, unique = true) 
 	private String email;
 	@Column(length = 20, nullable = false) 
@@ -42,11 +40,11 @@ public class User extends BaseEntity{
 	@Column(length = 50 ) 
 	private String img;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Location> locations =new ArrayList<>();
-	
-	 public void addLocation(Location location) {
-	        locations.add(location);
-	    }
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<Location> locations =new ArrayList<>();
+//	
+//	 public void addLocation(Location location) {
+//	        locations.add(location);
+//	    }
 }
 
