@@ -10,14 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ParkIt.Dao.BookingDao;
 import com.ParkIt.Dao.LocationDao;
+import com.ParkIt.Dao.PaymentDao;
 import com.ParkIt.Dao.SlotDao;
 import com.ParkIt.Dao.UserDao;
+import com.ParkIt.Dto.BookingGetAllResDto;
 import com.ParkIt.Dto.BookingReqDto;
 import com.ParkIt.Dto.BookinngResDto;
 import com.ParkIt.Dto.SlotAvailabilityResDto;
 import com.ParkIt.Entities.Booking;
 import com.ParkIt.Entities.BookingStatus;
 import com.ParkIt.Entities.Location;
+import com.ParkIt.Entities.Payment;
 import com.ParkIt.Entities.Slot;
 import com.ParkIt.Entities.User;
 import com.ParkIt.GlobalExceptionHandler.ResourceNotFoundException;
@@ -33,6 +36,7 @@ public class BookingServiceImpl implements BookingService {
     private final SlotDao slotRepository;
     private final LocationDao locationRepository;
     private final UserDao userRepository;
+    private final PaymentDao paymentRepo;
     private final ModelMapper mapper;
     
 	@Override
@@ -88,6 +92,18 @@ public class BookingServiceImpl implements BookingService {
 	        // save booking into table
 	        Booking saved = bookingRepository.save(booking);
 	        
+	        
+	        //  create payment 
+	        
+	        Payment payment = new Payment();
+	        payment.setAmount(dto.getPayment().getAmount());
+	        payment.setPaymentMode(dto.getPayment().getPaymentMode());
+	        payment.setPaymentStatus("CONFIRMED");
+	        payment.setPaymentDate(LocalDateTime.now());
+	        payment.setBooking(booking); // Link booking
+
+	        paymentRepo.save(payment); // Save payment
+	        
 	        // Convert to response
 	        BookinngResDto responseDto = new BookinngResDto();
 	        responseDto.setId(saved.getId());
@@ -101,6 +117,134 @@ public class BookingServiceImpl implements BookingService {
 	        responseDto.setEndTime(saved.getEndTime());
 	        responseDto.setStatus(saved.getStatus());
 	        responseDto.setLicenseNumber(saved.getLicenseNumber());
+	        
 		return responseDto;
 	}
+
+
+	@Override
+	public List<BookingGetAllResDto> getAllBookings() {
+		 List<Booking> bookings = bookingRepository.findAll();
+		 
+		 // check if emtpy then throw exception
+		 if (bookings.isEmpty()) {
+	            throw new ResourceNotFoundException("No bookings found");
+	        }
+		 
+		 
+		 return bookings.stream().map(booking -> convertToDto(booking)).collect(Collectors.toList());
+	}
+	
+	// helper method
+	 private BookingGetAllResDto convertToDto(Booking booking) {
+		 BookingGetAllResDto dto = new BookingGetAllResDto();
+
+	        dto.setBookingId(booking.getId());
+	        dto.setUserId(booking.getUserId().getId());
+	        dto.setUserName(booking.getUserId().getUserName());
+	        dto.setLocationId(booking.getLocationId().getId());
+	        dto.setLocationName(booking.getLocationId().getLocationName());
+	        dto.setSlotId(booking.getSlotId().getId());
+	        dto.setSlotName(booking.getSlotId().getSlotName());
+	        dto.setLicenseNumber(booking.getLicenseNumber());
+	        dto.setStartTime(booking.getStartTime());
+	        dto.setEndTime(booking.getEndTime());
+	        dto.setStatus(booking.getStatus());
+
+	        return dto;
+	    }
+
+
+	@Override
+	public BookingGetAllResDto getBookingById(Long id) {
+		  Booking booking = bookingRepository.findById(id)
+	                .orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + id));
+		  BookingGetAllResDto dto = new BookingGetAllResDto();
+		 
+		  	dto.setBookingId(booking.getId());
+
+	        // User
+	        dto.setUserId(booking.getUserId().getId());
+	        dto.setUserName(booking.getUserId().getUserName());
+
+	        // Location
+	        dto.setLocationId(booking.getLocationId().getId());
+	        dto.setLocationName(booking.getLocationId().getLocationName());
+
+	        // Slot
+	        dto.setSlotId(booking.getSlotId().getId());
+	        dto.setSlotName(booking.getSlotId().getSlotName());
+
+	        // Others
+	        dto.setLicenseNumber(booking.getLicenseNumber());
+	        dto.setStartTime(booking.getStartTime());
+	        dto.setEndTime(booking.getEndTime());
+	        dto.setStatus(booking.getStatus());
+
+	        return dto;
+	}
+
+
+	@Override
+	public List<BookingGetAllResDto> getBookingsByUserId(Long userId) {
+		 List<Booking> bookings = bookingRepository.findByUserId_Id(userId);
+
+		    if (bookings.isEmpty()) {
+		        throw new ResourceNotFoundException("No bookings found for user ID: " + userId);
+		    }
+
+		    return bookings.stream()
+		                   .map(booking -> mapBookingToBookingGetAllResDto(booking))
+		                   .collect(Collectors.toList());
+	}
+	
+	// helper method
+	
+	private BookingGetAllResDto mapBookingToBookingGetAllResDto(Booking booking) {
+		BookingGetAllResDto dto = new BookingGetAllResDto();
+
+		    dto.setBookingId(booking.getId());
+		    dto.setUserId(booking.getUserId().getId());
+		    dto.setUserName(booking.getUserId().getUserName());
+		    dto.setLocationId(booking.getLocationId().getId());
+		    dto.setLocationName(booking.getLocationId().getLocationName());
+		    dto.setSlotId(booking.getSlotId().getId());
+		    dto.setSlotName(booking.getSlotId().getSlotName());
+		    dto.setLicenseNumber(booking.getLicenseNumber());
+		    dto.setStartTime(booking.getStartTime());
+		    dto.setEndTime(booking.getEndTime());
+		    dto.setStatus(booking.getStatus());
+	    return dto;
+	}
+
+
+	@Override
+	public List<BookingGetAllResDto> getBookingsByStatus(BookingStatus status) {
+		 List<Booking> bookings = bookingRepository.findByStatus(status);
+		    return bookings.stream()
+		    		.map(booking -> mapBookingToBookingGetAllResDto(booking))
+		                   .collect(Collectors.toList());
+	}
+
+
+	@Override
+	public BookingGetAllResDto updateBookingStatus(Long bookingId, BookingStatus status) {
+		Booking booking = bookingRepository.findById(bookingId)
+		        .orElseThrow(() -> new ResourceNotFoundException("Booking not found with ID: " + bookingId));
+
+		    booking.setStatus(status);
+		    Booking updatedBooking = bookingRepository.save(booking);
+
+		    return mapBookingToBookingGetAllResDto(updatedBooking);
+	}
+
+
+	@Override
+	public void deleteBookingById(Long bookingId) {
+		 Booking booking = bookingRepository.findById(bookingId)
+			        .orElseThrow(() -> new ResourceNotFoundException("Booking not found with ID: " + bookingId));
+
+			    bookingRepository.delete(booking);
+	}
+
 }

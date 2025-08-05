@@ -21,4 +21,8 @@ public interface BookingDao  extends JpaRepository<Booking, Long>{
 	        @Param("endTime") LocalDateTime endTime,
 	        @Param("status") BookingStatus status
 	    );
+	 
+	 List<Booking> findByUserId_Id(Long userId);
+	 
+	 List<Booking> findByStatus(BookingStatus status);
 }

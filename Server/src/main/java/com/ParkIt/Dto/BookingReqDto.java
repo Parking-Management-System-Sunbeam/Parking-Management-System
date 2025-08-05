@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,15 +26,18 @@ public class BookingReqDto {
     private Long locationId;
 
     @NotNull(message = "Start time is required")
-//    @Future(message = "Start time must be in the future")
+    @Future(message = "Start time must be in the future")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime startTime;
 
     @NotNull(message = "End time is required")
-//    @Future(message = "End time must be in the future")
+    @Future(message = "End time must be in the future")
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime endTime;
 
     @NotBlank(message = "License number is required")
     private String licenseNumber;
+    
+    @Valid
+    private PaymentRequestDto payment;
 }
