@@ -20,11 +20,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Payment {
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "payment_id")
-	 	private Long id;
+public class Payment extends BaseEntity{
+	
 	 
 	 @Column(name = "amount", nullable = false)
 	    private double amount;
