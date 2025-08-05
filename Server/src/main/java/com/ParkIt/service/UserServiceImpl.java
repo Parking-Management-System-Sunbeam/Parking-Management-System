@@ -1,5 +1,10 @@
 package com.ParkIt.service;
 
+import java.util.List;
+import java.util.Optional;
+//import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +14,9 @@ import com.ParkIt.Dto.ApiResponse;
 import com.ParkIt.Dto.UserRequestDto;
 import com.ParkIt.Dto.UserSignInDto;
 import com.ParkIt.Dto.UserSignInResponseDto;
+import com.ParkIt.Dto.UserUpdateReqDto;
 import com.ParkIt.Entities.User;
+import com.ParkIt.Entities.UserRole;
 import com.ParkIt.GlobalExceptionHandler.AlreadyExistsException;
 import com.ParkIt.GlobalExceptionHandler.ResourceNotFoundException;
 
@@ -27,7 +34,7 @@ public class UserServiceImpl  implements UserService {
 		
 		if(userDao.existsByEmail(user.getEmail()))
 		{
-			throw new AlreadyExistsException("User is already present with email :" + user.getEmail() );
+			throw new AlreadyExistsException("User is already present with email : " + user.getEmail() );
 		}
 	
 		User persistUser=mapper.map(user, User.class);
@@ -48,6 +55,70 @@ public class UserServiceImpl  implements UserService {
 		 
 		return mapper.map(persistUser, UserSignInResponseDto.class);
 	}
+
+
+	//update user
+	@Override
+	public ApiResponse patchUser(Long id, UserUpdateReqDto userDto) {
+		 User newUser = userDao.findById(id)
+				 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		 
+		 if(userDto.getImg() != null) {
+			 newUser.setImg(userDto.getImg());
+		 }
+		 
+		 if(userDto.getPhone() != null) {
+			 newUser.setPhone(userDto.getPhone());
+		 }
+		 if(userDto.getUserName() != null) {
+			 newUser.setPhone(userDto.getUserName());
+		 }
+		 
+		 return new ApiResponse("User Updated successfully ");
+	}
+
+
+
+
+// Getting active users
+//	@Override
+//	public List<UserSignInResponseDto> getAllUsers() {
+//		List<User> users = userDao.findByIsDeletedFalse();
+//		return users.stream().map(u->mapper.map(u, UserSignInResponseDto.class)).collect(Collectors.toList());
+//				
+//	}
+
 	
+	@Override
+	public List<UserSignInResponseDto> getAllAdmins() {
+		List<User> users = userDao.findByUserRole(UserRole.ADMIN);
+		
+		
+			return users.stream().map(u->mapper.map(u,UserSignInResponseDto.class)).collect(Collectors.toList());
+		
+	}
+
+
+	@Override
+	public UserSignInResponseDto getUserById(Long id) {
+		User user = userDao.findById(id).orElseThrow(()-> new ResourceNotFoundException("User not found"));
+//		if(user.isDeleted == true) {
+//			// TODO return 
+//		}
+		
+		return mapper.map(user, UserSignInResponseDto.class);
+	}
+
+//	//Soft Deleted future scope
+//	@Override
+//	public ApiResponse softDelete(Long id) {
+//		 User user = userDao.findById(id)
+//				 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+//		
+//		 user.setIsDeleted(true);
+//		 
+//		return new ApiResponse("User Deleted ");
+//	}
+//	
 
 }

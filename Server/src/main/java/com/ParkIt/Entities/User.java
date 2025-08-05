@@ -40,6 +40,7 @@ public class User extends BaseEntity{
 	@Column(length = 50 ) 
 	private String img;
 	
+//	 private boolean isDeleted = false;
 //	@OneToMany(cascade = CascadeType.ALL)
 //	private List<Location> locations =new ArrayList<>();
 //	
