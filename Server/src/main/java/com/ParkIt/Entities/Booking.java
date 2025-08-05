@@ -26,10 +26,22 @@ public class Booking extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
-
+    
+  
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "vehicle_id", nullable = false)
+//    private Vehicle vehicleId;
+    
+    @Column(name = "license_number", nullable = false, length = 20)
+    private String licenseNumber;
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vehicle_id", nullable = false)
-    private Vehicle vehicleId;
+    @JoinColumn(name = "slot_id", nullable = false)
+    private Slot slotId;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location locationId;
     
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
@@ -39,5 +51,5 @@ public class Booking extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20, nullable = false)
-    private BookingStatus status;
+    private BookingStatus status = BookingStatus.PENDING;
 }

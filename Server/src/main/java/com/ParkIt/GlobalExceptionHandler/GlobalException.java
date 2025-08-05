@@ -22,6 +22,14 @@ public class GlobalException {
 		
 	}
 	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<?> ResourceNotFoundExceptionHandler(ResourceNotFoundException e)
+	{
+		
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
+		
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -32,5 +40,10 @@ public class GlobalException {
 
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+	
+	 @ExceptionHandler(IllegalArgumentException.class)
+	    public ResponseEntity<String> handleBadRequest(IllegalArgumentException ex) {
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+	    }
 
 }
