@@ -3,6 +3,7 @@ package com.ParkIt.Dto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ParkIt.Entities.Feedback;
 import com.ParkIt.Entities.Location;
 import com.ParkIt.Entities.VehicleType;
 
@@ -25,6 +26,9 @@ public class LocationResponseDto {
     private String description;
     private List<SlotResponseDto> slots;
     private List<VehicleType> vehicleTypes;
+    
+    private Double avgRating;
+    
     public LocationResponseDto(Location location) {
         this.id = location.getId();
         this.location_name = location.getLocationName();
@@ -41,5 +45,15 @@ public class LocationResponseDto {
                     slot.isAvailable()
                 ))
                 .collect(Collectors.toList());
+        
+        if (location.getFeedbacks() != null && !location.getFeedbacks().isEmpty()) {
+            this.avgRating = location.getFeedbacks()
+                .stream()
+                .mapToInt(Feedback::getRating)
+                .average()
+                .orElse(0.0);
+        } else {
+            this.avgRating = 0.0;
+        }
     }
 }

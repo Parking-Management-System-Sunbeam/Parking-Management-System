@@ -13,6 +13,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Location extends  BaseEntity {
 	 @Column(name = "image",length = 30)
 	private String image;
 	 
+	
 	 @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
 	 private List<Slot> slots = new ArrayList<>();
      
@@ -58,5 +60,17 @@ public class Location extends  BaseEntity {
 		    }
 		    slots.clear();
 		}
+
+	    @ManyToOne
+	    @JoinColumn(name = "user_id")
+	 private User user;
+	 
+	 @Column(name = "average_rating")
+	 private double averageRating;
+
+	 @Column(name = "rating_count")
+	 private int ratingCount;
+	 @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+	 private List<Feedback> feedbacks = new ArrayList<>();
 }
 

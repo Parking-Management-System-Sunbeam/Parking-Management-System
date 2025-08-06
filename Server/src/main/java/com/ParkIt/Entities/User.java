@@ -49,16 +49,16 @@ public class User extends BaseEntity{
 	
 	//helpers
 	
-	 public void addVehicle(Vehicle vehicle) {
-		 vehicle.setUser(this);     
-		    this.vehicles.add(vehicle);         
-		}
-	 public void removeVehicle(Vehicle vehicle) {
-		
-		 vehicle.setUser(null);
-		    
-		    vehicles.clear();
-		}
+//	 public void addVehicle(Vehicle vehicle) {
+//		 vehicle.setUser(this);     
+//		    this.vehicles.add(vehicle);         
+//		}
+//	 public void removeVehicle(Vehicle vehicle) {
+//		
+//		 vehicle.setUser(null);
+//		    
+//		    vehicles.clear();
+//		}
 	
 //	@OneToMany(cascade = CascadeType.ALL)
 //	private List<Location> locations =new ArrayList<>();
@@ -66,5 +66,7 @@ public class User extends BaseEntity{
 //	 public void addLocation(Location location) {
 //	        locations.add(location);
 //	    }
+	
+
 }
 
