@@ -19,10 +19,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Slot {
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    @Column(name = "slot_id")
-	    private Long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 	 
 	 @Column(name = "slot_name", nullable = false, unique = true)
 	 private String slotName;

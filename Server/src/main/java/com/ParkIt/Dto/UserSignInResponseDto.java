@@ -17,7 +17,7 @@ public class UserSignInResponseDto {
 	 
 	private String email;
 	 
-
+// For security purpose
 //	private String password;
 	
 	private UserRole userRole;

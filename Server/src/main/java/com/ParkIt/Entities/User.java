@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -41,6 +42,24 @@ public class User extends BaseEntity{
 	private String img;
 	
 //	 private boolean isDeleted = false;
+
+	
+	@OneToMany(mappedBy = "user" , cascade =  CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<Vehicle> vehicles = new ArrayList<>();
+	
+	//helpers
+	
+	 public void addVehicle(Vehicle vehicle) {
+		 vehicle.setUser(this);     
+		    this.vehicles.add(vehicle);         
+		}
+	 public void removeVehicle(Vehicle vehicle) {
+		
+		 vehicle.setUser(null);
+		    
+		    vehicles.clear();
+		}
+	
 //	@OneToMany(cascade = CascadeType.ALL)
 //	private List<Location> locations =new ArrayList<>();
 //	

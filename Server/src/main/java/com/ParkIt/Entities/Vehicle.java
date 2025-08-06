@@ -15,12 +15,15 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "vehicles")
-
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vehicle extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    private User userId;
+    private User user;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "vehicle_type", nullable = false)
