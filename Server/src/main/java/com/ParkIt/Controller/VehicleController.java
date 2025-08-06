@@ -1,11 +1,8 @@
 package com.ParkIt.Controller;
 
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ParkIt.Dto.ApiResponse;
 import com.ParkIt.Dto.VehicleRequestDto;
-import com.ParkIt.Dto.VehicleResponseDto;
 import com.ParkIt.service.VehicleService;
 
 import lombok.AllArgsConstructor;
@@ -55,5 +51,10 @@ public class VehicleController {
     public ResponseEntity<?> getFourWheelers(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(  vehicleService.getFourWheelers(id));
         
+    }
+    
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteVehicle(@PathVariable Long id){
+    	return ResponseEntity.status(HttpStatus.OK).body(vehicleService.deleteVehicle(id));
     }
 }

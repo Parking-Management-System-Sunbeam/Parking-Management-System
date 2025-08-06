@@ -16,6 +16,7 @@ import com.ParkIt.Dto.VehicleResponseDto;
 import com.ParkIt.Entities.User;
 import com.ParkIt.Entities.Vehicle;
 import com.ParkIt.Entities.VehicleType;
+import com.ParkIt.GlobalExceptionHandler.ResourceNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -64,7 +65,7 @@ public class VehicleServiceImpl implements VehicleService {
 	    //update
 	    public ApiResponse updateVehicle(Long id, VehicleRequestDto dto) {
 	        Vehicle vehicle = vehicleDao.findById(id)
-	                .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+	                .orElseThrow(() -> new ResourceNotFoundException("Vehicle not found"));
 
 	        if (dto.getLicensePlate() != null && !vehicle.getLicensePlate().equals(dto.getLicensePlate()) &&
 	        		vehicleDao.existsByLicensePlate(dto.getLicensePlate())) {
@@ -103,6 +104,15 @@ public class VehicleServiceImpl implements VehicleService {
 		                .map(vehicle -> modelMapper.map(vehicle, VehicleResponseDto.class))
 		                .collect(Collectors.toList());
 		    
+		}
+
+		@Override
+		public ApiResponse deleteVehicle(Long id) {
+			Vehicle vehicle = vehicleDao.findById(id)
+					.orElseThrow(()-> new ResourceNotFoundException("Vehicle not found"));
+			
+			vehicleDao.delete(vehicle);
+			return new ApiResponse("Vehicle deleted succesfully");
 		}
 	    
 	    

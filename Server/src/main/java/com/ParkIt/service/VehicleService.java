@@ -17,4 +17,6 @@ public interface VehicleService  {
 	
 	ApiResponse updateVehicle(Long id, VehicleRequestDto dto);
 	
+	ApiResponse deleteVehicle(Long id);
+	
 }

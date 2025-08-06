@@ -24,8 +24,9 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/locations")
-public class LocationCntroller {
+public class LocationController {
 
+	
 	 private final LocationService locationService;
 	 
 	 
