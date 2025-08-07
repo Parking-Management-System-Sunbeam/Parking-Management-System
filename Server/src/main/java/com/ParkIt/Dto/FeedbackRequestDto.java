@@ -12,6 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FeedbackRequestDto {
 	
+	
 	private Long id;
 	
 	@NotNull(message="Location id required")

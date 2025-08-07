@@ -41,5 +41,7 @@ public class LocationRequestDto {
 
 	    @NotBlank(message = "Description is required")
 	    private String description;
+	    
+	    private Double averageRating = 0.0; 
 	
 }

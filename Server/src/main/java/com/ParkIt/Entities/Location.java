@@ -37,6 +37,7 @@ public class Location extends  BaseEntity {
 	 @Column(name = "image",length = 30)
 	private String image;
 	 
+	 
 	
 	 @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
 	 private List<Slot> slots = new ArrayList<>();
@@ -66,10 +67,10 @@ public class Location extends  BaseEntity {
 	 private User user;
 	 
 	 @Column(name = "average_rating")
-	 private double averageRating;
+	 private Double averageRating;
 
 	 @Column(name = "rating_count")
-	 private int ratingCount;
+	 private Long ratingCount;
 	 @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
 	 private List<Feedback> feedbacks = new ArrayList<>();
 }

@@ -41,6 +41,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	        }
 
 	        Feedback feedback = mapper.map(dto, Feedback.class);
+	        feedback.setId(null);  
 	        feedback.setUser(userOpt.get());
 	        feedback.setLocation(locOpt.get());
 
@@ -101,6 +102,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 	        return feedbackRepo.findByLocationId(locationId).stream()
 	                .map(fb -> {
 	                    FeedbackResponseDto dto = mapper.map(fb, FeedbackResponseDto.class);
+	                    dto.setUserName(fb.getUser().getUserName()); // Set name from user
+	                    dto.setImage(fb.getUser().getImg()); 
+	                    dto.setUserId(fb.getUser().getId());
+	                    dto.setLocationId(locationId);
 	                    dto.setUserName(fb.getUser().getUserName());
 	                    return dto;
 	                })
@@ -115,9 +120,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 		    int total = feedbacks.stream().mapToInt(Feedback::getRating).sum();
 		    int count = feedbacks.size();
 		    double avg = count > 0 ? (double) total / count : 0.0;
-
+		    Long newCont = (long) count;
 		    location.setAverageRating(avg);
-		    location.setRatingCount(count);
+		    location.setRatingCount(newCont);
 		    locationRepo.save(location);
 	    }
 }
