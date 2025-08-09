@@ -25,6 +25,7 @@ public class UserSignInResponseDto {
 	private String phone;
 	 
 	private String img;
+	private String token;
 	
 	
 }

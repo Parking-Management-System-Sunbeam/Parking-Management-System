@@ -1,11 +1,11 @@
 package com.ParkIt.service;
 
 import java.util.List;
-import java.util.Optional;
 //import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +19,7 @@ import com.ParkIt.Entities.User;
 import com.ParkIt.Entities.UserRole;
 import com.ParkIt.GlobalExceptionHandler.AlreadyExistsException;
 import com.ParkIt.GlobalExceptionHandler.ResourceNotFoundException;
+import com.ParkIt.Security.JwtUtil;
 
 import lombok.AllArgsConstructor;
 
@@ -29,6 +30,10 @@ public class UserServiceImpl  implements UserService {
 	
 	private UserDao userDao;
 	private ModelMapper mapper;
+	 private BCryptPasswordEncoder passwordEncoder;
+	 private JwtUtil jwtUtil;
+	
+	
 	@Override
 	public ApiResponse createUser(UserRequestDto user) {
 		
@@ -38,6 +43,10 @@ public class UserServiceImpl  implements UserService {
 		}
 	
 		User persistUser=mapper.map(user, User.class);
+		
+		   // Hash the password before saving
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        persistUser.setPassword(hashedPassword);
 		System.out.println(persistUser);
 		userDao.save(persistUser);
 		return new ApiResponse("User saved successfully ");
@@ -48,12 +57,17 @@ public class UserServiceImpl  implements UserService {
 	public UserSignInResponseDto userSignin(UserSignInDto user) {
 		 User persistUser = userDao.findByEmail(user.getEmail())
 				 .orElseThrow(() -> new ResourceNotFoundException("User Email invalid"));
-		 if(!persistUser.getPassword().equals(user.getPassword()))
-			 throw new ResourceNotFoundException("User password invalid");
-		 
+		  if(!passwordEncoder.matches(user.getPassword(), persistUser.getPassword())) {
+	            throw new ResourceNotFoundException("User password invalid");
+	        }
 		 System.out.println(persistUser);
 		 
-		return mapper.map(persistUser, UserSignInResponseDto.class);
+		 String token = jwtUtil.generateToken(persistUser);
+		 
+		 UserSignInResponseDto responseDto = mapper.map(persistUser, UserSignInResponseDto.class);
+	        responseDto.setToken(token);
+	        
+	        return responseDto;
 	}
 
 
@@ -71,7 +85,7 @@ public class UserServiceImpl  implements UserService {
 			 newUser.setPhone(userDto.getPhone());
 		 }
 		 if(userDto.getUserName() != null) {
-			 newUser.setPhone(userDto.getUserName());
+			 newUser.setUserName(userDto.getUserName());
 		 }
 		 
 		 return new ApiResponse("User Updated successfully ");
