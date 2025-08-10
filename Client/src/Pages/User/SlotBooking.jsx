@@ -42,8 +42,8 @@ const SlotBooking = () => {
 
   const formatDateTime = (dateStr, timeStr) => {
     // Merge date + time → "YYYY-MM-DDTHH:mm:ss"
-    const dateTime = new Date(`${dateStr}T${timeStr}`);
-    return dateTime.toISOString().split(".")[0]; // remove milliseconds
+    // const dateTime = new Date(`${dateStr}T${timeStr}`);
+    return `${dateStr}T${timeStr}:00`;
   };
   useEffect(() => {
     if (isFormValid()) {

@@ -47,6 +47,6 @@ public class LocationRequestDto {
 	    
 	    private Double averageRating = 0.0; 
 	    
-	   
+
 	
 }

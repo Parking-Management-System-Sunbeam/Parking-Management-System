@@ -17,15 +17,14 @@ const Listing = ({ data }) => {
   };
   return (
     <>
-      <div className="w-50 h-[300px]  overflow-hidden shadow-md flex flex-col   cursor-pointer  rounded-2xl ">
+      <div
+        onClick={onDetails}
+        className="w-50 h-[300px]  overflow-hidden shadow-md flex flex-col   cursor-pointer  rounded-2xl "
+      >
         <img
-          src={
-            data.image
-              ? data.image
-              : "https://via.placeholder.com/400x200.png?text=No+Image+Available"
-          }
-          className="w-full h-40 object-cover rounded-t-2xl"
-          alt={data.location_name || "Parking Location"}
+          src={data.image}
+          className="w-full h-40 object-cover rounded-t-2xl  "
+          alt="Sunbeam Parking"
         />
         <div className="px-4  text-[18px] mt-2  font-bold text-left text-[#ffbd59]">
           {data.location_name}
