@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ParkIt.Dao.LocationDao;
+import com.ParkIt.Dao.UserDao;
 import com.ParkIt.Dto.LocationRequestDto;
 import com.ParkIt.Dto.LocationResponseDto;
 import com.ParkIt.Entities.Location;
 import com.ParkIt.Entities.Slot;
+import com.ParkIt.Entities.User;
 import com.ParkIt.GlobalExceptionHandler.AlreadyExistsException;
 import com.ParkIt.GlobalExceptionHandler.ResourceNotFoundException;
 
@@ -24,6 +26,7 @@ public class LocationServiceImpl implements LocationService{
 
 	private final ModelMapper mapper;
 	private final LocationDao locationDao;
+	private final UserDao userDao;
 	
 	@Override
 	public LocationResponseDto createLocation(LocationRequestDto dto) {
@@ -32,6 +35,10 @@ public class LocationServiceImpl implements LocationService{
             throw new AlreadyExistsException("Location with same name already exists");
         }
 		  Location location = mapper.map(dto, Location.class);
+		 
+		  User user = userDao.findById(dto.getUserId())
+		            .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + dto.getUserId()));
+		    location.setUser(user);
 		  
 	        for (int i = 1; i <= dto.getNumberOfSlots(); i++) {
 	            Slot slot = new Slot();

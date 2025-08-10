@@ -16,7 +16,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-   const { signup, loading } = useAuth();
+   const { signup } = useAuth();
 
    const handleNameChange = (e) => {
     setName(e.target.value);

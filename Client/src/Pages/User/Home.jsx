@@ -1,11 +1,16 @@
-import React from "react";
-import Sidebar from "../../components/Sidebar";
+
 import SearchComponent from "../../Components/SearchComponent";
 import FilterComponent from "../../Components/FilterComponent";
 import Listing from "../../Components/Listing";
 
 import sunbeamParking from "../../assets/ParkingImages/parking.jpg"
+import { useAuth } from "../../Context/AuthContext";
+import Sidebar from "../../Components/Sidebar";
 function Home() {
+
+  const {user }= useAuth();
+
+  console.log(user)
 
   const filterOptions = [
     { label: "All", value: "all" , active: true},
@@ -50,18 +55,16 @@ function Home() {
             {
 
               localStorage.getItem("user")
-                ? JSON.parse(localStorage.getItem("user")).userName
+                ?user.userName
                 : "Guest"
             }
 
           </span>
           </div>
           <div className="w-15 h-15 bg-gray-800 rounded-full mr-6">
+            {/* {console.log( "asljdhlufglskdg" +JSON.parse(localStorage.getItem("user")).img)} */}
             <img src={ 
-                 JSON.parse(localStorage.getItem("user")).img
-                 ? JSON.parse(localStorage.getItem("user")).img
-                 : "https://via.placeholder.com/150" // Placeholder image if no user image is available
-              } 
+               user.img  || 'https://www.w3schools.com/howto/img_avatar.png'              } 
              
                  alt="User Avatar" className="w-full h-full object-cover rounded-full" />
           </div>

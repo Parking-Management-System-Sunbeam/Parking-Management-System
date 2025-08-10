@@ -54,9 +54,9 @@ const ProtectedRoutes = ({
 // Higher-order component for role-based route protection
 export const withRoleProtection = (Component, options = {}) => {
   return (props) => (
-    <ProtectedRoute {...options}>
+    <ProtectedRoutes {...options}>
       <Component {...props} />
-    </ProtectedRoute>
+    </ProtectedRoutes>
   );
 };
 

@@ -29,7 +29,7 @@ public class LocationRequestDto {
 	    @Min(value = 1, message = "Price must be greater than 0")
 	    private Integer price;
 
-	    @NotBlank(message = "Image URL or path is required")
+	   
 	    private String image;
 
 	    @NotNull(message = "Number of slots is required")
@@ -43,5 +43,7 @@ public class LocationRequestDto {
 	    private String description;
 	    
 	    private Double averageRating = 0.0; 
+	    
+	    private Long userId;
 	
 }

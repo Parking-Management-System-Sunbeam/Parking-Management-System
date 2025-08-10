@@ -8,6 +8,7 @@ const AuthContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
+ 
   if (!context) throw new Error("useAuth must be used within an AuthProvider");
   return context;
 };
@@ -42,6 +43,7 @@ export const AuthProvider = ({ children }) => {
       const data = await loginService(email, password);
 
       const userData = {
+        id: data.id,
         userName: data.userName,
         email: data.email,
         userRole: data.userRole,

@@ -22,7 +22,9 @@
 import React from 'react'
 import logo from '../../assets/Parkit.png';
 import { Link } from "react-router-dom";
+import { useAuth } from '../../Context/AuthContext';
 function AdminSidebar() {
+    const { logout } = useAuth();
   return (
     <div>
       <>
@@ -49,9 +51,12 @@ function AdminSidebar() {
           </div>
         </div>
         <div className='mb-8 '>
-          <Link to="/login" className="text-red-600 hover:text-red-800 font-medium transition">
+          <button
+          onClick={()=> logout()}
+            className="text-red-600 px-11 hover:text-red-800 font-medium transition"
+          >
             Logout
-          </Link>
+          </button>
         </div>
       </div>
       </>

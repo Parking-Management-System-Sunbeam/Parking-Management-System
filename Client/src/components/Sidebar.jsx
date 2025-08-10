@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext";
 
 const Sidebar = () => {
-  const { logout, loading } = useAuth();
+  const { logout } = useAuth();
   return (
     <>
       <div className="flex flex-col justify-between sticky top-0 h-screen w-full items-center ">

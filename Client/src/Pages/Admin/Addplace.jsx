@@ -1,16 +1,25 @@
-
 import React, { useState } from 'react';
 import ButtonComponent from '../../Components/ButtonComponent';
 import AdminSidebar from '../../Components/Admin/AdminSidebar';
+import { addPlaceService } from '../../Services/placeService';
+import { toast } from 'react-toastify';
+import { useAuth } from '../../Context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
 const AddPlace = () => {
+ 
+  const {user} = useAuth();
+  const nav = useNavigate();
   const [formData, setFormData] = useState({
     location: '',
     area: '',
     pincode: '',
     slots: '',
     price: '',
-    
-    image: null,
+    image: '',
+    vehicleTypes: ["TWO_WHEELER"], 
+    description: '',
+   
   });
 
   const handleChange = e => {
@@ -22,17 +31,45 @@ const AddPlace = () => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleVehicleTypeChange = e => {
+    setFormData({ ...formData, vehicleTypes: [e.target.value] });
+  };
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log(formData); // Replace with your submit logic
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("You must be logged in as admin to add a place.");
+      return;
+    }
+
+    try {
+      const request = {
+        locationName: formData.location,
+        pincode: formData.pincode,
+        price: Number(formData.price),
+        image: formData.image ? URL.createObjectURL(formData.image) : "",
+        numberOfSlots: Number(formData.slots),
+        vehicleTypes: formData.vehicleTypes,
+        description: formData.description || "",
+        averageRating: 0.1,
+        userId: user.id,
+      };
+
+      const res = await addPlaceService(request, token);
+      console.log(res)
+      toast.success("Place added successfully!");
+      nav('/admin/dashboard'); 
+    } catch (error) {
+      toast.error(error.data || "Failed to add place.");
+    }
   };
 
   return (
-
-    
-     <div className="flex  bg-white text-gray-700 p-10 bg-gray-100 min-h-screen overflow-hidden">
-       <aside className="w-64">
-        <AdminSidebar/>
+    <div className="flex bg-white text-gray-700 p-10  min-h-screen overflow-hidden">
+      <aside className="w-64">
+        <AdminSidebar />
       </aside>
       <form
         onSubmit={handleSubmit}
@@ -50,7 +87,16 @@ const AddPlace = () => {
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
             />
           </div>
-
+<div>
+            <label className="block text-gray-800 font-medium mb-1"> Desciption</label>
+            <input
+              type="text"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+          </div>
           <div>
             <label className="block text-gray-800 font-medium mb-1"> Area</label>
             <input
@@ -62,6 +108,7 @@ const AddPlace = () => {
             />
           </div>
 
+          {/* Slots + Price */}
           <div className="flex gap-4">
             <div className="flex-1">
               <label className="block text-gray-800 font-medium mb-1"> Slots</label>
@@ -86,6 +133,7 @@ const AddPlace = () => {
             </div>
           </div>
 
+          {/* Pincode */}
           <div>
             <label className="block text-gray-800 font-medium mb-1">Pincode</label>
             <input
@@ -97,7 +145,20 @@ const AddPlace = () => {
             />
           </div>
 
-          
+          {/* Vehicle Type Dropdown */}
+          <div>
+            <label className="block text-gray-800 font-medium mb-1">Vehicle Type</label>
+            <select
+              name="vehicleType"
+              value={formData.vehicleTypes[0]}
+              onChange={handleVehicleTypeChange}
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            >
+              <option value="TWO_WHEELER">Two Wheeler</option>
+              <option value="FOUR_WHEELER">Four Wheeler</option>
+              <option value="BOTH">Both</option>
+            </select>
+          </div>
         </div>
 
         {/* Right section */}
@@ -125,7 +186,7 @@ const AddPlace = () => {
 
         {/* Submit */}
         <div className="md:col-span-2 text-center pt-6">
-         <ButtonComponent title='Add Place' onPress={(e)=> window.alert("place added")}/>
+          <ButtonComponent title="Add Place" onPress={handleSubmit} />
         </div>
       </form>
     </div>
