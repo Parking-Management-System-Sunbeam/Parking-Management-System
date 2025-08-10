@@ -18,6 +18,9 @@ import lombok.ToString;
 @ToString
 public class LocationRequestDto {
 	
+		@NotNull(message = "User Id is required")
+		private Long userId;
+	
 	  @NotBlank(message = "Location name is required")
 	    private String locationName;
 
