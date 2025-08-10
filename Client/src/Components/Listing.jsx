@@ -4,11 +4,16 @@ import { useNavigate } from "react-router-dom";
 
 const Listing = ({ data }) => {
   console.log(data);
-  const nav= useNavigate();
+  const nav = useNavigate();
 
   const onDetails = () => {
     console.log("listing clicked");
-    nav("/details");
+    nav("/details", {
+      state: {
+        data: data,
+        id: data.id,
+      },
+    });
   };
   return (
     <>
@@ -22,21 +27,22 @@ const Listing = ({ data }) => {
           alt="Sunbeam Parking"
         />
         <div className="px-4  text-[18px] mt-2  font-bold text-left text-[#ffbd59]">
-          {data.name}
+          {data.location_name}
         </div>
         <div className="mt-1 space-y-1 text-left text-sm font-light px-4 ">
           <div className="flex justify-between text-gray-600">
             <div className=" flex-1 font-bold text-gray-800">Location </div>
-            <div className=" flex-1">{data.location} </div>
+            <div className=" flex-1">{data.location_name} </div>
           </div>
           <div className="flex justify-between text-gray-600">
-            <div className=" flex-1 font-bold text-gray-800">Vehicles </div>
-            <div className=" flex-1">{data.vehicles} </div>
+            <div className=" flex-1 font-bold text-gray-800">Pincode </div>
+            <div className=" flex-1">{data.pincode} </div>
           </div>
           <div className="flex justify-between text-gray-600">
-            
             <div className=" flex-1 font-bold text-gray-800">Rating </div>
-            <div className=" flex space-x-2 gap-2 items-center flex-1">{data.rating} <Star width={18} fill="#ffbd59"     /> </div>
+            <div className=" flex space-x-2 gap-2 items-center flex-1">
+              {data.avgRating}/5
+            </div>
           </div>
 
           {/*  */}
