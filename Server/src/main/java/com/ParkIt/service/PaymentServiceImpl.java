@@ -7,7 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.ParkIt.Dao.PaymentDao;
+import com.ParkIt.Dto.MonthlyIncomeDto;
 import com.ParkIt.Dto.PaymentResDto;
+import com.ParkIt.Dto.YearlyIncomeDto;
 import com.ParkIt.Entities.Booking;
 import com.ParkIt.Entities.Payment;
 
@@ -45,5 +47,21 @@ public class PaymentServiceImpl implements PaymentService {
 
 	        return dto;
 	    }
+	@Override
+	public List<MonthlyIncomeDto> getMonthlyIncomeByLocation(Long locationId) {
+		List<Object[]> results = paymentRepository.getMonthlyIncomeByLocation(locationId);
+        return results.stream()
+                .map(obj -> new MonthlyIncomeDto((String) obj[0], (Double) obj[1]))
+                .collect(Collectors.toList());
+		
+	}
+	@Override
+	public List<YearlyIncomeDto> getYearlyIncomeByLocation(Long locationId) {
+		  List<Object[]> results = paymentRepository.getYearlyIncomeByLocation(locationId);
+		    return results.stream()
+		            .map(obj -> new YearlyIncomeDto((Integer) obj[0], (Double) obj[1]))
+		            .collect(Collectors.toList());
+	}
+	
 
 }

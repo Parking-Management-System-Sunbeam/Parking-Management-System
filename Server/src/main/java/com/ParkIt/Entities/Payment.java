@@ -34,7 +34,7 @@ public class Payment {
 	  	private Booking booking;
 	 
 	 @Column(name = "payment_mode", nullable = false, length = 50)
-	 	private String paymentMode;
+	 	private String paymentMode = "UPI";
 	 
 	 @Column(name = "payment_status", nullable = false, length = 20)
 	    private String paymentStatus; 

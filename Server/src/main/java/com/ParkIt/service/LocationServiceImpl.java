@@ -34,11 +34,11 @@ public class LocationServiceImpl implements LocationService{
 		if (locationDao.existsByLocationName(dto.getLocationName())) {
             throw new AlreadyExistsException("Location with same name already exists");
         }
+		
+		 User newUser = userDao.findById(dto.getUserId())
+				 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+		
 		  Location location = mapper.map(dto, Location.class);
-		 
-		  User user = userDao.findById(dto.getUserId())
-		            .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + dto.getUserId()));
-		    location.setUser(user);
 		  
 	        for (int i = 1; i <= dto.getNumberOfSlots(); i++) {
 	            Slot slot = new Slot();
@@ -48,8 +48,8 @@ public class LocationServiceImpl implements LocationService{
 	            location.addSlot(slot);
 	        }
 	        Location saved = locationDao.save(location);
-	        System.out.println(saved);
 	        LocationResponseDto response = mapper.map(saved, LocationResponseDto.class);
+	        response.setLocation_name(location.getLocationName());
 		return response;
 	}
 
