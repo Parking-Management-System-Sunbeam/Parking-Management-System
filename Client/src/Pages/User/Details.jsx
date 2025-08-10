@@ -21,7 +21,7 @@ const Details = () => {
         console.error("Error fetching slot details:", error);
       });
   };
-  useEffect(() => {
+  useEffect(() => { 
     fetch();
   }, []);
   return (
