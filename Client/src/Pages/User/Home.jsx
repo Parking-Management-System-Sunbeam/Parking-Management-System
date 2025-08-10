@@ -5,8 +5,9 @@ import FilterComponent from "../../Components/FilterComponent";
 import Listing from "../../Components/Listing";
 
 import sunbeamParking from "../../assets/ParkingImages/parking.jpg"
+import { useNavigate } from "react-router-dom";
 function Home() {
-
+const Navigate = useNavigate();
   const filterOptions = [
     { label: "All", value: "all" , active: true},
     { label: "Cars", value: "cars" },
@@ -56,15 +57,21 @@ function Home() {
 
           </span>
           </div>
-          <div className="w-15 h-15 bg-gray-800 rounded-full mr-6">
-            <img src={ 
-                 JSON.parse(localStorage.getItem("user")).img
-                 ? JSON.parse(localStorage.getItem("user")).img
-                 : "https://via.placeholder.com/150" // Placeholder image if no user image is available
-              } 
-             
-                 alt="User Avatar" className="w-full h-full object-cover rounded-full" />
-          </div>
+          <div
+  onClick={() => Navigate("/profile")}
+  className="w-15 h-15 bg-gray-800 rounded-full mr-6 cursor-pointer"
+>
+  <img
+    src={
+      JSON.parse(localStorage.getItem("user")).img
+        ? JSON.parse(localStorage.getItem("user")).img
+        : "https://via.placeholder.com/150"
+    }
+    alt="User Avatar"
+    className="w-full h-full object-cover rounded-full"
+  />
+</div>
+
         </div>
 
         {/* filter */}

@@ -27,6 +27,7 @@ import { AuthProvider, useAuth } from "./Context/AuthContext";
 import ProtectedRoute, { AdminRoute, UserRoute } from "./Components/PotectedRoutes";
 import { ToastContainer } from "react-toastify";
 import { useState } from "react";
+import Profile from "./Pages/User/Profile";
 
 const InitialRouteHandler = () => {
   const { isAuthenticated, user, loading } = useAuth();
@@ -101,6 +102,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <SearchComponent />
+          </ProtectedRoute>
+        } 
+      />
+       <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         } 
       />
