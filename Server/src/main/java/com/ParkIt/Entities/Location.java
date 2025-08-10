@@ -34,7 +34,7 @@ public class Location extends  BaseEntity {
 	private String pincode;
 	 @Column(name = "price", nullable = false)
 	private int price;	
-	 @Column(name = "image",length = 30)
+	 @Column(name = "image",length = 60)
 	private String image;
 	 
 	 
