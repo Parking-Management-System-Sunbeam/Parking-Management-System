@@ -45,9 +45,26 @@ function Home() {
 
       <SearchComponent />
         <div className="flex items-center">
-          <span className="text-gray-600 mr-4">Welcome, User!</span>
+          <span className="text-gray-600 mr-4">Welcome,{" "}
+            
+            {
+
+              localStorage.getItem("user")
+                ? JSON.parse(localStorage.getItem("user")).userName
+                : "Guest"
+            }
+
+          </span>
           </div>
-          <div className="w-15 h-15 bg-gray-800 rounded-full mr-6"></div>
+          <div className="w-15 h-15 bg-gray-800 rounded-full mr-6">
+            <img src={ 
+                 JSON.parse(localStorage.getItem("user")).img
+                 ? JSON.parse(localStorage.getItem("user")).img
+                 : "https://via.placeholder.com/150" // Placeholder image if no user image is available
+              } 
+             
+                 alt="User Avatar" className="w-full h-full object-cover rounded-full" />
+          </div>
         </div>
 
         {/* filter */}

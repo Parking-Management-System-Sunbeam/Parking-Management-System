@@ -2,14 +2,15 @@ import React, { useState } from 'react'
 import parking from "../../assets/AuthImages/parking.jpg"
 import TextInputCompnent from '../../Components/TextInputCompnent'
 import ButtonComponent from '../../Components/ButtonComponent';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../Context/AuthContext';
 const Login = () => {
 
   const nav = useNavigate();
-
+const location = useLocation();
    const [password, setPassword] = useState('');
    const [email, setEmail] = useState('');
-   
+    const { login, loading } = useAuth();
 
 
   const handleEmailChange = (e) => {
@@ -21,6 +22,12 @@ const Login = () => {
     console.log(password)
   }
 
+  const from = location.state?.from?.pathname || "/home";
+    const handleLogin = async () => {
+    const result = await login(email, password);
+    if (result.success) {
+      nav(from, { replace: true });
+    }}
   return (
     <div className=' '>
         <div className="flex  flex-row justify-content-center">
@@ -53,8 +60,8 @@ const Login = () => {
 
           {/* footer */}
           <div className='flex flex-col items-center space-y-4 '>
-            <ButtonComponent  title='Sign In' onPress={()=>{ 
-              nav('/home');
+            <ButtonComponent  isDisable={loading} title='Sign In' onPress={()=>{ 
+              handleLogin();
              }} />
             <p className='text-gray-500 text-center'>Don't have an account? <Link to="/signup" className='text-gray-800   font-bold hover:underline'>Sign Up</Link></p>
             </div>

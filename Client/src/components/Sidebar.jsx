@@ -1,8 +1,10 @@
 import React from "react";
 import logo from "../assets/Parkit.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
 const Sidebar = () => {
+  const { logout, loading } = useAuth();
   return (
     <>
       <div className="flex flex-col justify-between sticky top-0 h-screen w-full items-center ">
@@ -24,12 +26,12 @@ const Sidebar = () => {
           </div>
         </div>
         <div className="mb-8  w-full   p-5 ">
-          <Link
-            to="/login"
+          <button
+          onClick={()=> logout()}
             className="text-red-600 px-11 hover:text-red-800 font-medium transition"
           >
             Logout
-          </Link>
+          </button>
         </div>
       </div>
     </>

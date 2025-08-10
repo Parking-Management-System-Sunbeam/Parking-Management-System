@@ -43,7 +43,9 @@ public class UserServiceImpl  implements UserService {
 		}
 	
 		User persistUser=mapper.map(user, User.class);
-		
+		  if (persistUser.getUserRole() == null) {
+		        persistUser.setUserRole(UserRole.USER);
+		    }
 		   // Hash the password before saving
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         persistUser.setPassword(hashedPassword);

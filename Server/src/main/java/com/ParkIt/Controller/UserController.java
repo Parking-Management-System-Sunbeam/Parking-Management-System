@@ -29,7 +29,7 @@ public class UserController {
 	@PostMapping("/signup")
 	public ResponseEntity<?> createUser(@RequestBody @Valid UserRequestDto userDto )
 	{
-		
+		System.out.println(userDto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(userDto));
 	}
 	
