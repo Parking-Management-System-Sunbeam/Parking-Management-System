@@ -1,5 +1,6 @@
 package com.ParkIt.service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -94,9 +95,13 @@ public class BookingServiceImpl implements BookingService {
 	        
 	        
 	        //  create payment 
+	        LocalDateTime start = dto.getStartTime();
+	        LocalDateTime end = dto.getEndTime();
+	        double hoursToCharge = (double) Math.
+	        		ceil(Duration.between(start, end).toMinutes() / 60.0);
 	        
 	        Payment payment = new Payment();
-	        payment.setAmount(dto.getPayment().getAmount());
+	        payment.setAmount(dto.getPayment().getAmount() * hoursToCharge);
 	        payment.setPaymentMode(dto.getPayment().getPaymentMode());
 	        payment.setPaymentStatus("CONFIRMED");
 	        payment.setPaymentDate(LocalDateTime.now());
@@ -105,6 +110,8 @@ public class BookingServiceImpl implements BookingService {
 	        paymentRepo.save(payment); // Save payment
 	        
 	        // Convert to response
+	    
+	        
 	        BookinngResDto responseDto = new BookinngResDto();
 	        responseDto.setId(saved.getId());
 //	        responseDto.setUserId(user.getId());

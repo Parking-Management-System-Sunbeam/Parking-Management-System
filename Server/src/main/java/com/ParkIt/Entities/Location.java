@@ -61,8 +61,8 @@ public class Location extends  BaseEntity {
 		    slots.clear();
 		}
 
-	    @ManyToOne
-	    @JoinColumn(name = "user_id")
+	 @ManyToOne
+	 @JoinColumn(name = "user_id")
 	 private User user;
 	 
 	 @Column(name = "average_rating")
