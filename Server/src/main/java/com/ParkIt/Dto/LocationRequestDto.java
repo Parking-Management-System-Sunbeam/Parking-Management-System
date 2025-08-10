@@ -18,7 +18,7 @@ import lombok.ToString;
 @ToString
 public class LocationRequestDto {
 	
-		@NotNull(message = "User Id is required")
+		
 		private Long userId;
 	
 	  @NotBlank(message = "Location name is required")
@@ -47,6 +47,6 @@ public class LocationRequestDto {
 	    
 	    private Double averageRating = 0.0; 
 	    
-	    private Long userId;
+	   
 	
 }
