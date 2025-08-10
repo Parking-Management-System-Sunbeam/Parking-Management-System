@@ -47,3 +47,14 @@ export const deleteLocation = async (locationId) => {
     throw error.response?.data || "Failed to update location";
   }
 };
+
+export const getAllLocationIds = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/locations/get/all`);
+    const ids = response.data.map(loc => loc.id);  
+    return ids;
+  } catch (error) {
+    console.error("Error fetching all location IDs:", error);
+    throw error.response?.data || "Failed to fetch location IDs";
+  }
+};
