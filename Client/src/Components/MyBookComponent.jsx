@@ -5,16 +5,16 @@ import {
   CarFront,
   ArrowUpRight,
   ArrowRightCircle,
-} from "lucide-react"; 
+} from "lucide-react";
 
 const MyBookComponent = ({
-  day = "SUNDAY",
-  date = "31",
-  month = "DECEMBER",
-  vehicleType = "Car",
-  location = "Mumbai",
-  time = "10:00 AM-12:00 PM",
-  status = false,
+  day,
+  date,
+  month,
+  vehicleType,
+  location,
+  time,
+  status,
 }) => {
   return (
     <div className="flex items-center  bg-[#ffbd59] rounded-2xl p-4 w-full max-w-5xl shadow-sm">
@@ -47,9 +47,17 @@ const MyBookComponent = ({
 
         {/* Status */}
         <div className="flex items-center gap-2  text-gray-600">
-            <span className={`text-xs text-white  py-2 px-5 rounded-2xl font-semibold ${status ? 'bg-green-500' : 'bg-red-500 '}`}>
-                {status ? "Completed" : "Cancelled  "}
-            </span>
+          <span
+            className={`text-xs text-white  py-2 px-5 rounded-2xl font-semibold ${
+              status == "UPCOMING"
+                ? "bg-green-500"
+                : status == "ONGOING"
+                ? "bg-blue-500"
+                : "bg-red-500"
+            }`}
+          >
+            {status}
+          </span>
         </div>
 
         {/* View Details */}
