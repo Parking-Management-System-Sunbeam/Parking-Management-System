@@ -10,18 +10,15 @@ const PayDetails = ({ locData, locState }) => {
   const [licenseNumber, setLicenseNumber] = useState("");
   const [upiMode, setUpiMode] = useState("");
 
-  const context = useAuth();
+  const { user } = useAuth();
 
-  console.log(context);
   const navigate = useNavigate();
   const handleLicenceChange = (e) => {
     setLicenseNumber(e.target.value);
-    console.log(licenseNumber);
   };
 
   const handleUpiChange = (e) => {
     setUpiMode(e.target.value);
-    console.log(upiMode);
   };
   const handleClick = async () => {
     if (!licenseNumber || !upiMode) {
@@ -29,7 +26,7 @@ const PayDetails = ({ locData, locState }) => {
       return;
     }
     const reqBody = {
-      userId: 1,
+      userId: user.id,
       slotId: locState.slotId,
       locationId: locData.id,
       startTime: locState.startTime,
@@ -75,7 +72,7 @@ const PayDetails = ({ locData, locState }) => {
               onChange={handleUpiChange}
             />
 
-            <ButtonComponent title="Pay" onClick={handleClick} />
+            <ButtonComponent title="Pay" onPress={handleClick} />
           </div>
         </div>
       </div>
