@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../Context/AuthContext";
 import Sidebar from "../../components/Sidebar";
 
-// Simple JWT decoder without extra packages
-function parseJwt(token) {
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
-    );
-    return JSON.parse(jsonPayload);
-  } catch {
-    return null;
-  }
-}
-
 const Profile = () => {
-  const token = localStorage.getItem("token");
-  const decoded = token ? parseJwt(token) : null;
-  const userId = decoded?.id || decoded?.userId || null;
+  const { user, loading, updateUser } = useAuth();
 
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
@@ -30,37 +12,18 @@ const Profile = () => {
     phone: "",
     img: null,
   });
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!userId) {
-      setError("User not logged in");
-      setLoading(false);
-      return;
+    if (user) {
+      setProfileData({
+        userName: user.userName || "",
+        email: user.email || "",
+        phone: user.phone || "",
+        img: user.img || null,
+      });
     }
-
-    const fetchUser = async () => {
-      try {
-        const res = await fetch(`http://localhost:9090/user/${userId}`);
-        if (!res.ok) throw new Error("Failed to fetch user data");
-        const data = await res.json();
-
-        setProfileData({
-          userName: data.userName || "",
-          email: data.email || "",
-          phone: data.phone || "",
-          img: data.img || null,
-        });
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [userId]);
+  }, [user]);
 
   const handleChange = (e) => {
     setProfileData({
@@ -69,50 +32,29 @@ const Profile = () => {
     });
   };
 
-  const toggleEdit = () => setIsEditing(!isEditing);
+  const toggleEdit = () => {
+    setError(null);
+    setIsEditing(!isEditing);
+  };
 
   const handleSave = async () => {
-    if (!userId) {
+    if (!user) {
       setError("User not logged in");
       return;
     }
-
     setError(null);
     try {
-      const response = await fetch(`http://localhost:9090/user/update/${userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          // "Authorization": `Bearer ${token}`, // if needed
-        },
-        body: JSON.stringify({
-          userName: profileData.userName,
-          email: profileData.email,
-          phone: profileData.phone,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save profile");
-      }
-
-      const updatedUser = await response.json();
-
-      setProfileData({
-        userName: updatedUser.userName || profileData.userName,
-        email: updatedUser.email || profileData.email,
-        phone: updatedUser.phone || profileData.phone,
-        img: updatedUser.img || profileData.img,
-      });
-
+      const res =
+      await updateUser(profileData);
+      console.log(res)
       setIsEditing(false);
     } catch (err) {
-      setError(err.message);
+      setError(err.message || "Failed to save profile");
     }
   };
 
-  if (loading) return <p>Loading profile...</p>;
-  if (error) return <p className="text-red-600">Error: {error}</p>;
+  if (loading) return <p>Loading user data...</p>;
+  if (!user) return <p>User not logged in</p>;
 
   const fields = [
     { label: "Name", name: "userName", type: "text" },
@@ -133,7 +75,7 @@ const Profile = () => {
           <img
             src={profileData.img}
             alt={`${profileData.userName}'s profile`}
-            className="w-32 h-32 mb-6"
+            className="w-32 h-32 rounded-full mb-6"
           />
         )}
 
@@ -180,6 +122,7 @@ const Profile = () => {
               </button>
             )}
           </div>
+
           {error && <p className="text-red-600 mt-2">{error}</p>}
         </div>
       </div>
