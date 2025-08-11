@@ -22,6 +22,7 @@ import { AuthProvider, useAuth } from "./Context/AuthContext";
 import ProtectedRoute, { AdminRoute, UserRoute } from "./Components/PotectedRoutes";
 import { ToastContainer } from "react-toastify";
 import { useState } from "react";
+import Profile from "./Pages/User/Profile";
 
 const InitialRouteHandler = () => {
   const { isAuthenticated, user } = useAuth();
@@ -68,17 +69,95 @@ const AppRoutes = () => {
         }
       />
 
-      {/* User Routes */}
-      <Route path="/home" element={<UserRoute><Home /></UserRoute>} />
-      <Route path="/search" element={<UserRoute><SearchComponent /></UserRoute>} />
-      <Route path="/about-us" element={<UserRoute><AboutUs /></UserRoute>} />
-      <Route path="/booking" element={<UserRoute><Bookings /></UserRoute>} />
-      <Route path="/payment" element={<UserRoute><Payment /></UserRoute>} />
-      <Route path="/order-summary" element={<UserRoute><OrderSummary /></UserRoute>} />
-      <Route path="/payment-component" element={<UserRoute><PaymentComponent /></UserRoute>} />
-      <Route path="/pay-details" element={<UserRoute><PayDetails /></UserRoute>} />
-      <Route path="/details" element={<UserRoute><Details /></UserRoute>} />
-      <Route path="/slot-booking" element={<UserRoute><SlotBooking /></UserRoute>} />
+      {/* User Routes - Protected and accessible to authenticated users */}
+      <Route 
+        path="/home" 
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/search" 
+        element={
+          <ProtectedRoute>
+            <SearchComponent />
+          </ProtectedRoute>
+        } 
+      />
+       <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/about-us" 
+        element={
+          <ProtectedRoute>
+            <AboutUs />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/booking" 
+        element={
+          <ProtectedRoute>
+            <Bookings />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/payment" 
+        element={
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/order-summary" 
+        element={
+          <ProtectedRoute>
+            <OrderSummary />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/payment-component" 
+        element={
+          <ProtectedRoute>
+            <PaymentComponent />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/pay-details" 
+        element={
+          <ProtectedRoute>
+            <PayDetails />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/details" 
+        element={
+          <ProtectedRoute>
+            <Details />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/slot-booking" 
+        element={
+          <ProtectedRoute>
+            <SlotBooking />
+          </ProtectedRoute>
+        } 
+      />
 
       {/* Admin Routes */}
       <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />

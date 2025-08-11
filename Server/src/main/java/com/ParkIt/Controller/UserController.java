@@ -2,6 +2,7 @@ package com.ParkIt.Controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,7 @@ import lombok.AllArgsConstructor;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 	
 	private final UserService userService;
@@ -63,6 +65,7 @@ public ResponseEntity<?> getUserById(@PathVariable Long id){
 }
 
 //		PUT    /users/{id}               - Update user
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 	@PatchMapping("/update/{id}")
 	public ResponseEntity<?> updateUser(@PathVariable Long id ,@RequestBody UserUpdateReqDto user){
 		return ResponseEntity.status(HttpStatus.OK).body(userService.patchUser(id,user));
