@@ -6,9 +6,10 @@ import Listing from "../../Components/Listing";
 
 import axios from "axios";
 import { BASE_URL } from "../../Utils/Helper";
+import { useNavigate } from "react-router-dom";
 function Home() {
   const [parkingData, setParkingData] = useState([]);
-
+const nav = useNavigate();
   const filterOptions = [
     { label: "All", value: "all", active: true },
     { label: "Cars", value: "cars" },
@@ -53,7 +54,7 @@ function Home() {
                 : "Guest"}
             </span>
           </div>
-          <div className="w-15 h-15 bg-gray-800 rounded-full mr-6">
+          <div onClick={()=> nav("/profile")} className="w-15 h-15 bg-gray-800 rounded-full mr-6">
             <img src={ 
                  JSON.parse(localStorage.getItem("user")).img
                  ? JSON.parse(localStorage.getItem("user")).img
