@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Listing from "../../Components/Listing";
 import ButtonComponent from "../../Components/ButtonComponent";
 import AdminSidebar from "../../Components/Admin/AdminSidebar";
 import { deleteLocation, getAllLocations, updateLocation } from "../../Services/placeService";
 import { toast } from "react-toastify";
+import Listing from "../../Components/Admin/Listing";
 
 const EditPlace = () => {
   const [locations, setLocations] = useState([]);

@@ -92,13 +92,14 @@ export const AuthProvider = ({ children }) => {
     toast.info("You have been logged out.");
   };
 
-  const updateUser = async (updatedUserData) => {
+  const updateUser = async (updatedUserData,id) => {
     try {
       const token = localStorage.getItem("token");
-      const data = await updateUserService(updatedUserData, token);
-
-      const newUserData = { ...user, ...data };
+      const data = await updateUserService(updatedUserData, token, id);
+      console.log("updatedUserData" , updatedUserData)
+      const newUserData = { ...user, ...updatedUserData };
       setUser(newUserData);
+      console.log("Updated user data:", newUserData);
       localStorage.setItem("user", JSON.stringify(newUserData));
       toast.success("Profile updated successfully!");
     } catch (error) {

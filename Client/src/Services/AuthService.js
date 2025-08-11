@@ -14,8 +14,8 @@ export const signupService = async (userData) => {
   return response.data;
 };
 
-export const updateUserService = async (updatedUserData, token) => {
-  const response = await axios.put(`${BASE_URL}/user/update`, updatedUserData, {
+export const updateUserService = async (updatedUserData, token,id) => {
+  const response = await axios.patch(`${BASE_URL}/user/update/${id}`, updatedUserData, {
     headers: {
       Authorization: `Bearer ${token}`
     }

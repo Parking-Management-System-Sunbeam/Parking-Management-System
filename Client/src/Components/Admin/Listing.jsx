@@ -1,33 +1,22 @@
 import { Star } from "lucide-react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 const Listing = ({ data }) => {
   console.log(data);
-  const nav = useNavigate();
-
-  const onDetails = () => {
-    console.log("listing clicked");
-    nav("/details", {
-      state: {
-        data: data,
-        id: data.id,
-      },
-    });
-  };
+ 
   return (
     <>
       <div
-        onClick={onDetails}
+     
         className="w-50 h-[300px]  overflow-hidden shadow-md flex flex-col   cursor-pointer  rounded-2xl "
       >
         <img
           src={data.image}
           className="w-full h-40 object-cover rounded-t-2xl  "
-          alt="img"
+          alt="Sunbeam Parking"
         />
         <div className="px-4  text-[18px] mt-2  font-bold text-left text-[#ffbd59]">
-          {data.location_name}
+          {data.name}
         </div>
         <div className="mt-1 space-y-1 text-left text-sm font-light px-4 ">
           <div className="flex justify-between text-gray-600">
@@ -35,14 +24,13 @@ const Listing = ({ data }) => {
             <div className=" flex-1">{data.location_name} </div>
           </div>
           <div className="flex justify-between text-gray-600">
-            <div className=" flex-1 font-bold text-gray-800">Pincode </div>
-            <div className=" flex-1">{data.pincode} </div>
+            <div className=" flex-1 font-bold text-gray-800">Vehicles </div>
+            <div className=" flex-1">{data.vehicleTypes} </div>
           </div>
           <div className="flex justify-between text-gray-600">
+            
             <div className=" flex-1 font-bold text-gray-800">Rating </div>
-            <div className=" flex space-x-2 gap-2 items-center flex-1">
-              {data.avgRating}/5
-            </div>
+            <div className=" flex space-x-2 gap-2 items-center flex-1">{data.avgRating} <Star width={18} fill="#ffbd59"     /> </div>
           </div>
 
           {/*  */}

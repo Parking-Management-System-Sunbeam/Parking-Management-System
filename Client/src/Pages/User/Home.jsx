@@ -6,20 +6,21 @@ import Listing from "../../Components/Listing";
 
 import axios from "axios";
 import { BASE_URL } from "../../Utils/Helper";
+import { useNavigate } from "react-router-dom";
 function Home() {
   const [parkingData, setParkingData] = useState([]);
-
-  const filterOptions = [
-    { label: "All", value: "all", active: true },
-    { label: "Cars", value: "cars" },
-    { label: "Bikes", value: "bikes" },
-    { label: "Trucks", value: "trucks" },
-    { label: "Vans", value: "vans" },
-    { label: "SUVs", value: "suvs" },
-    { label: "Electric Vehicles", value: "electric" },
-    { label: "Luxury Vehicles", value: "luxury" },
-    { label: "Luxury Vehicles", value: "luxury" },
-  ];
+const nav = useNavigate();
+  // const filterOptions = [
+  //   { label: "All", value: "all", active: true },
+  //   { label: "Cars", value: "cars" },
+  //   { label: "Bikes", value: "bikes" },
+  //   { label: "Trucks", value: "trucks" },
+  //   { label: "Vans", value: "vans" },
+  //   { label: "SUVs", value: "suvs" },
+  //   { label: "Electric Vehicles", value: "electric" },
+  //   { label: "Luxury Vehicles", value: "luxury" },
+  //   { label: "Luxury Vehicles", value: "luxury" },
+  // ];
 
   useEffect(() => {
     axios
@@ -53,7 +54,7 @@ function Home() {
                 : "Guest"}
             </span>
           </div>
-          <div className="w-15 h-15 bg-gray-800 rounded-full mr-6">
+          <div onClick={()=>nav('/profile')} className="w-15 h-15 bg-gray-800 rounded-full mr-6">
             <img src={ 
                  JSON.parse(localStorage.getItem("user")).img
                  ? JSON.parse(localStorage.getItem("user")).img
@@ -64,7 +65,7 @@ function Home() {
           </div>
         </div>
 
-        {/* filter */}
+        {/* filter
         <div className="flex flex-wrap gap-4 mb-6">
           {filterOptions.map((option) => (
             <FilterComponent
@@ -74,7 +75,7 @@ function Home() {
               defActive={option.active}
             />
           ))}
-        </div>
+        </div> */}
 
         {/* cards */}
 
