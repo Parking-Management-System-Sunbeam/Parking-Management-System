@@ -22,3 +22,12 @@ export const updateUserService = async (updatedUserData, token) => {
   });
   return response.data;
 };
+
+export const getUserDetailsService = async (userId, token) => {
+  const response = await axios.get(`${BASE_URL}/user/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data;
+}
