@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+# Application properties (if sensitive info present)
+application.properties
+application.yml
+

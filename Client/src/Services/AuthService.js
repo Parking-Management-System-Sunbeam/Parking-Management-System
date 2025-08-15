@@ -1,0 +1,33 @@
+// services/authService.js
+import axios from "axios";
+import { BASE_URL } from "../Utils/Helper";
+
+
+
+export const loginService = async (email, password) => {
+  const response = await axios.post(`${BASE_URL}/user/signin`, { email, password });
+  return response.data; 
+};
+
+export const signupService = async (userData) => {
+  const response = await axios.post(`${BASE_URL}/user/signup`, userData);
+  return response.data;
+};
+
+export const updateUserService = async (updatedUserData, token,id) => {
+  const response = await axios.patch(`${BASE_URL}/user/update/${id}`, updatedUserData, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data;
+};
+
+export const getUserDetailsService = async (userId, token) => {
+  const response = await axios.get(`${BASE_URL}/user/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data;
+}

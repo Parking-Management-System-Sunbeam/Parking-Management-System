@@ -1,0 +1,31 @@
+package com.ParkIt.Dto;
+
+import com.ParkIt.Entities.UserRole;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class UserSignInResponseDto {
+
+	private Long id;
+	
+	private String userName;
+	 
+	private String email;
+	 
+// For security purpose
+//	private String password;
+	
+	private UserRole userRole;
+	
+	private String phone;
+	 
+	private String img;
+	private String token;
+	
+	
+}
