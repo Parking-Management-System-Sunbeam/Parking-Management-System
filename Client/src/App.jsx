@@ -69,6 +69,7 @@ const AppRoutes = () => {
         }
       />
 
+<<<<<<< HEAD
       {/* User Routes */}
       <Route path="/home" element={<UserRoute><Home /></UserRoute>} />
       <Route path="/search" element={<UserRoute><SearchComponent /></UserRoute>} />
@@ -82,6 +83,97 @@ const AppRoutes = () => {
       <Route path="/slot-booking" element={<UserRoute><SlotBooking /></UserRoute>} />
       
       <Route path="/profile" element={<UserRoute><Profile /></UserRoute>} />
+=======
+      {/* User Routes - Protected and accessible to authenticated users */}
+      <Route 
+        path="/home" 
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/search" 
+        element={
+          <ProtectedRoute>
+            <SearchComponent />
+          </ProtectedRoute>
+        } 
+      />
+       <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/about-us" 
+        element={
+          <ProtectedRoute>
+            <AboutUs />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/booking" 
+        element={
+          <ProtectedRoute>
+            <Bookings />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/payment" 
+        element={
+          <ProtectedRoute>
+            <Payment />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/order-summary" 
+        element={
+          <ProtectedRoute>
+            <OrderSummary />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/payment-component" 
+        element={
+          <ProtectedRoute>
+            <PaymentComponent />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/pay-details" 
+        element={
+          <ProtectedRoute>
+            <PayDetails />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/details" 
+        element={
+          <ProtectedRoute>
+            <Details />
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/slot-booking" 
+        element={
+          <ProtectedRoute>
+            <SlotBooking />
+          </ProtectedRoute>
+        } 
+      />
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
 
       {/* Admin Routes */}
       <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />

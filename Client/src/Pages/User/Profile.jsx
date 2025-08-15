@@ -1,18 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import Sidebar from "../../components/Sidebar";
+<<<<<<< HEAD
 import img from "../../assets/profileImage.jpg"
+=======
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
 
 const Profile = () => {
   const { user, loading, updateUser } = useAuth();
 
+<<<<<<< HEAD
   
+=======
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({
     userName: "",
     email: "",
     phone: "",
+<<<<<<< HEAD
     img: img,
+=======
+    img: null,
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
   });
   const [error, setError] = useState(null);
 
@@ -47,7 +57,11 @@ const Profile = () => {
     setError(null);
     try {
       const res =
+<<<<<<< HEAD
       await updateUser(profileData, user.id);
+=======
+      await updateUser(profileData);
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
       console.log(res)
       setIsEditing(false);
     } catch (err) {
@@ -75,8 +89,13 @@ const Profile = () => {
 
         {profileData.img && (
           <img
+<<<<<<< HEAD
             src={img}
             
+=======
+            src={profileData.img}
+            alt={`${profileData.userName}'s profile`}
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
             className="w-32 h-32 rounded-full mb-6"
           />
         )}
@@ -132,4 +151,8 @@ const Profile = () => {
   );
 };
 
+<<<<<<< HEAD
 export default Profile;
+=======
+export default Profile;
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef

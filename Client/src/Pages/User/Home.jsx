@@ -7,6 +7,7 @@ import Listing from "../../Components/Listing";
 import axios from "axios";
 import { BASE_URL } from "../../Utils/Helper";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 
 import img from "../../assets/profileImage.jpg"
 function Home() {
@@ -23,6 +24,22 @@ const nav = useNavigate();
   //   { label: "Luxury Vehicles", value: "luxury" },
   //   { label: "Luxury Vehicles", value: "luxury" },
   // ];
+=======
+function Home() {
+  const [parkingData, setParkingData] = useState([]);
+const nav = useNavigate();
+  const filterOptions = [
+    { label: "All", value: "all", active: true },
+    { label: "Cars", value: "cars" },
+    { label: "Bikes", value: "bikes" },
+    { label: "Trucks", value: "trucks" },
+    { label: "Vans", value: "vans" },
+    { label: "SUVs", value: "suvs" },
+    { label: "Electric Vehicles", value: "electric" },
+    { label: "Luxury Vehicles", value: "luxury" },
+    { label: "Luxury Vehicles", value: "luxury" },
+  ];
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
 
   useEffect(() => {
     axios
@@ -56,7 +73,11 @@ const nav = useNavigate();
                 : "Guest"}
             </span>
           </div>
+<<<<<<< HEAD
           <div onClick={()=>nav('/profile')} className="w-15 h-15 bg-gray-800 rounded-full mr-6">
+=======
+          <div onClick={()=> nav("/profile")} className="w-15 h-15 bg-gray-800 rounded-full mr-6">
+>>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
             <img src={ 
                  img
               } 
