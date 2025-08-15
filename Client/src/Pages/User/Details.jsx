@@ -9,6 +9,7 @@ const Details = () => {
   const location = useLocation();
 
   const [data, setData] = useState(null);
+  console.log(data)
   const fetch = async () => {
     const id = location.state?.id;
     await axios

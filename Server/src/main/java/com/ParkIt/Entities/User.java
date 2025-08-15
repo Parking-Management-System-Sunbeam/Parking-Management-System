@@ -38,7 +38,7 @@ public class User extends BaseEntity{
 	private UserRole userRole;
 	@Column(length = 20, nullable = false) 
 	private String phone;
-	@Column(length = 50 ) 
+	@Column(length = 200 ) 
 	private String img;
 	
 //	 private boolean isDeleted = false;

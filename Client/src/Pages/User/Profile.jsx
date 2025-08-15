@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import Sidebar from "../../components/Sidebar";
+import img from "../../assets/profileImage.jpg"
 
 const Profile = () => {
   const { user, loading, updateUser } = useAuth();
@@ -11,7 +12,7 @@ const Profile = () => {
     userName: "",
     email: "",
     phone: "",
-    img: null,
+    img: img,
   });
   const [error, setError] = useState(null);
 
@@ -74,7 +75,7 @@ const Profile = () => {
 
         {profileData.img && (
           <img
-            src={profileData.img}
+            src={img}
             
             className="w-32 h-32 rounded-full mb-6"
           />

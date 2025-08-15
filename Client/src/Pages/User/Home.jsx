@@ -7,6 +7,8 @@ import Listing from "../../Components/Listing";
 import axios from "axios";
 import { BASE_URL } from "../../Utils/Helper";
 import { useNavigate } from "react-router-dom";
+
+import img from "../../assets/profileImage.jpg"
 function Home() {
   const [parkingData, setParkingData] = useState([]);
 const nav = useNavigate();
@@ -56,9 +58,7 @@ const nav = useNavigate();
           </div>
           <div onClick={()=>nav('/profile')} className="w-15 h-15 bg-gray-800 rounded-full mr-6">
             <img src={ 
-                 JSON.parse(localStorage.getItem("user")).img
-                 ? JSON.parse(localStorage.getItem("user")).img
-                 : "https://via.placeholder.com/150" // Placeholder image if no user image is available
+                 img
               } 
              
                  alt="User Avatar" className="w-full h-full object-cover rounded-full" />

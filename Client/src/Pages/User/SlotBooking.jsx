@@ -55,7 +55,7 @@ const SlotBooking = () => {
 
   const fetchSlots = async () => {
     const reqBody = {
-      locationId: location.state?.id || 1,
+      locationId: location.state.locid,
       startTime: formatDateTime(date, startTime),
       endTime: formatDateTime(date, endTime),
     };

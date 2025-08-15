@@ -1,6 +1,7 @@
 import { Star } from "lucide-react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import img from "../assets/getstarted.jpg"
 
 const Listing = ({ data }) => {
   console.log(data);
@@ -22,7 +23,7 @@ const Listing = ({ data }) => {
         className="w-50 h-[300px]  overflow-hidden shadow-md flex flex-col   cursor-pointer  rounded-2xl "
       >
         <img
-          src={data.image}
+          src={data.image  || img }
           className="w-full h-40 object-cover rounded-t-2xl  "
           alt="img"
         />
