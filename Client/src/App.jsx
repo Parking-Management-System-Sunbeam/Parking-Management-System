@@ -69,21 +69,6 @@ const AppRoutes = () => {
         }
       />
 
-<<<<<<< HEAD
-      {/* User Routes */}
-      <Route path="/home" element={<UserRoute><Home /></UserRoute>} />
-      <Route path="/search" element={<UserRoute><SearchComponent /></UserRoute>} />
-      <Route path="/about-us" element={<UserRoute><AboutUs /></UserRoute>} />
-      <Route path="/booking" element={<UserRoute><Bookings /></UserRoute>} />
-      <Route path="/payment" element={<UserRoute><Payment /></UserRoute>} />
-      <Route path="/order-summary" element={<UserRoute><OrderSummary /></UserRoute>} />
-      <Route path="/payment-component" element={<UserRoute><PaymentComponent /></UserRoute>} />
-      <Route path="/pay-details" element={<UserRoute><PayDetails /></UserRoute>} />
-      <Route path="/details" element={<UserRoute><Details /></UserRoute>} />
-      <Route path="/slot-booking" element={<UserRoute><SlotBooking /></UserRoute>} />
-      
-      <Route path="/profile" element={<UserRoute><Profile /></UserRoute>} />
-=======
       {/* User Routes - Protected and accessible to authenticated users */}
       <Route 
         path="/home" 
@@ -173,7 +158,6 @@ const AppRoutes = () => {
           </ProtectedRoute>
         } 
       />
->>>>>>> 41fddb8aaa4aaeec9b7351e428c2fca17b2ecfef
 
       {/* Admin Routes */}
       <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
